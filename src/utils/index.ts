@@ -65,8 +65,9 @@ export const getThumbsIterator = (
 
   const lastThumbInView = thumbsInView[thumbsInView.length - 1];
   const firstThumbInView = thumbsInView[0];
-  const nextThumb = thumbElements[lastThumbInView.index + 1];
-  const prevThumb = thumbElements[firstThumbInView.index - 1];
+  const nextThumb = lastThumbInView && thumbElements[lastThumbInView.index + 1];
+  const prevThumb =
+    firstThumbInView && thumbElements[firstThumbInView.index - 1];
 
   return {
     lastThumbInView,

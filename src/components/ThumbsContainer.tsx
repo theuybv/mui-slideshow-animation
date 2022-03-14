@@ -41,8 +41,6 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
     }
   }, [thumbsContainerRef]);
 
-  console.log(containerHeight);
-
   return (
     <Box display={"flex"} flexDirection={"column"}>
       <Box position={"relative"} zIndex={1}>
@@ -56,7 +54,6 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
             left={0}
             top={containerHeight / 2 - 24}
             height={"100%"}
-            hidden={currentIndex === 0}
           >
             <IconButton
               style={{ background: "white" }}
@@ -84,7 +81,6 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
             right={0}
             top={containerHeight / 2 - 24}
             height={"100%"}
-            hidden={currentIndex === images.length - 1}
           >
             <IconButton
               style={{ background: "white" }}

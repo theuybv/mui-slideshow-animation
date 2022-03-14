@@ -152,6 +152,9 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
                   });
                   setCurrentIndex(prevThumb.index);
                   onThumbClick && onThumbClick(event, prevThumb.index);
+                } else {
+                  setCurrentIndex(index);
+                  onThumbClick && onThumbClick(event, index);
                 }
               }}
             />

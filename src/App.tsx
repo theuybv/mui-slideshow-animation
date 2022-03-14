@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="xl">
       <Box
         width={"100%"}
         ref={containerRef}

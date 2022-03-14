@@ -1,5 +1,6 @@
 import { ImageCarouselProps } from "../components/ImageCarousel";
 import { faker } from "@faker-js/faker";
+import { RefObject } from "react";
 
 export enum AspectRatio {
   "16/9" = 16 / 9,
@@ -12,22 +13,9 @@ export const getWidthHeightFromAspectRatio = (
   aspectRatio: AspectRatio,
   maxWidth: number = 800
 ): { width: number; height: number } => {
-  const getHeight = (length: number, ratio: number) => {
-    const height = length / Math.sqrt(Math.pow(ratio, 2) + 1);
-    return Math.round(height);
-  };
-  const getWidth = (length: number, ratio: number) => {
-    const width = length / Math.sqrt(1 / (Math.pow(ratio, 2) + 1));
-    return Math.round(width);
-  };
-
-  const height = getHeight(maxWidth, aspectRatio);
-  const width =
-    aspectRatio === AspectRatio["1/1"] ? height : getWidth(height, aspectRatio);
-
   return {
-    width,
-    height,
+    width: maxWidth,
+    height: Math.round(maxWidth / aspectRatio),
   };
 };
 
@@ -46,3 +34,44 @@ export const randomImages: ImageCarouselProps["images"] = [...Array(20)].map(
     };
   }
 );
+
+export const intersectRect = (aElement: HTMLElement, bElement: HTMLElement) => {
+  const a = aElement.getBoundingClientRect();
+  const b = bElement.getBoundingClientRect();
+  return (
+    a.left <= b.right &&
+    b.left <= a.right &&
+    a.top <= b.bottom &&
+    b.top <= a.bottom
+  );
+};
+
+export const getThumbsIterator = (
+  thumbRefs: RefObject<HTMLElement>[],
+  thumbsContainerRef: RefObject<HTMLElement>
+) => {
+  const thumbElements = thumbRefs.map((value, thumbElementIndex) => {
+    return {
+      index: thumbElementIndex,
+      element: value.current,
+      isInView: intersectRect(
+        value.current as HTMLElement,
+        thumbsContainerRef.current as HTMLElement
+      ),
+    };
+  });
+
+  const thumbsInView = thumbElements.filter((value) => value.isInView);
+
+  const lastThumbInView = thumbsInView[thumbsInView.length - 1];
+  const firstThumbInView = thumbsInView[0];
+  const nextThumb = thumbElements[lastThumbInView.index + 1];
+  const prevThumb = thumbElements[firstThumbInView.index - 1];
+
+  return {
+    lastThumbInView,
+    firstThumbInView,
+    nextThumb,
+    prevThumb,
+  };
+};

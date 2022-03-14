@@ -26,7 +26,7 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({
 
   return (
     <Box width={width} height={height}>
-      <Stack spacing={2}>
+      <Stack spacing={1.2}>
         <ImageDisplay
           key={currentImage?.imageSrc}
           src={currentImage?.imageSrc}
@@ -34,7 +34,7 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({
         />
         <ThumbsContainer
           images={images}
-          onImageClick={(event, clickedImageIndex) => {
+          onThumbClick={(event, clickedImageIndex) => {
             setCurrentImage((prevState) => {
               return images.find((item, index) => index === clickedImageIndex);
             });

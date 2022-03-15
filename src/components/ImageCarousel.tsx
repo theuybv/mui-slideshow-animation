@@ -12,23 +12,16 @@ export type CarouselImage = {
 export type ImageCarouselProps = {
   images: CarouselImage[]
   ratio: number
-  maxImageHeight: number
 } & StackProps
 
-export const ImageCarousel: FC<ImageCarouselProps> = ({
-  images,
-  ratio,
-  maxImageHeight,
-  ...rest
-}) => {
+export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ratio, ...rest }) => {
   const [currentImage, setCurrentImage] = useState<CarouselImage | undefined>(images[0])
-  console.log(ratio, maxImageHeight)
 
   return (
     <Stack spacing={1.2} {...rest}>
       <Box position={'relative'} height={0} paddingBottom={`${100 / ratio}%`}>
         <Box position={'absolute'} top={0} right={0} bottom={0} left={0} bgcolor={'black'}>
-          <ImageFrame key={currentImage?.imageSrc} src={currentImage?.imageSrc} />
+          <ImageFrame key={currentImage?.imageSrc} src={currentImage?.imageSrc} ratio={ratio} />
         </Box>
       </Box>
       <ThumbsContainer

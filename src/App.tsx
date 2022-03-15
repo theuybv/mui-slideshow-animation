@@ -2,7 +2,7 @@ import { ImageCarousel } from "./components/ImageCarousel";
 import { Box, Container, CssBaseline } from "@mui/material";
 import {
   AspectRatio,
-  getWidthHeightFromAspectRatio,
+  getDimensionFromAspectRatio,
   randomImages,
 } from "./utils";
 import { useEffect, useRef, useState } from "react";
@@ -11,7 +11,7 @@ import { throttle } from "lodash";
 function App() {
   const containerRef = useRef<HTMLElement>();
   const getDimension = () =>
-    getWidthHeightFromAspectRatio(
+    getDimensionFromAspectRatio(
       AspectRatio["3/2"],
       containerRef.current?.getBoundingClientRect().width
     );

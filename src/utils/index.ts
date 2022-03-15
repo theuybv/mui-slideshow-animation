@@ -9,7 +9,7 @@ export enum AspectRatio {
   "1/1" = 1,
 }
 
-export const getWidthHeightFromAspectRatio = (
+export const getDimensionFromAspectRatio = (
   aspectRatio: AspectRatio,
   maxWidth: number = 800
 ): { width: number; height: number } => {
@@ -21,7 +21,7 @@ export const getWidthHeightFromAspectRatio = (
 
 export const randomImages: ImageCarouselProps["images"] = [...Array(20)].map(
   () => {
-    const { width, height } = getWidthHeightFromAspectRatio(
+    const { width, height } = getDimensionFromAspectRatio(
       AspectRatio["3/2"],
       800
     );

@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker";
 import { RefObject } from "react";
 import { images } from "../data";
 
-export enum AspectRatio {
+export enum ASPECT_RATIO {
   "16/9" = 16 / 9,
   "9/16" = 9 / 16,
   "3/2" = 3 / 2,
@@ -12,23 +12,9 @@ export enum AspectRatio {
   "1/1" = 1,
 }
 
-export const getMaxDimensionFromAspectRatio = (
-  aspectRatio: AspectRatio,
-  maxWidth: number = 800
-): { width: number; height: number } => {
-  return {
-    width: maxWidth,
-    height: maxWidth / aspectRatio,
-  };
-};
-
 export const randomImages: ImageCarouselProps["images"] = [
   ...Array(images.length),
 ].map((_value, index) => {
-  const { width, height } = getMaxDimensionFromAspectRatio(
-    AspectRatio["3/2"],
-    800
-  );
   return {
     imageSrc: images[index].image,
     thumbSrc: images[index].thumbnail,

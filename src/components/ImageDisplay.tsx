@@ -1,26 +1,27 @@
 import { FC } from "react";
-import { Box, Fade } from "@mui/material";
+import { Box, BoxProps, Fade } from "@mui/material";
+import { ASPECT_RATIO } from "../utils";
 
-export type ImageDisplayProps = Partial<
-  Pick<HTMLImageElement, "src" | "alt" | "height">
-> & {
-  width?: number | string;
-};
+export type ImageDisplayProps = {
+  src?: HTMLImageElement["src"];
+} & BoxProps;
 
-export const ImageDisplay: FC<ImageDisplayProps> = ({
-  children,
-  height,
-  width,
-  ...rest
-}) => {
+export const ImageDisplay: FC<ImageDisplayProps> = ({ src, ...rest }) => {
   return (
-    <Box bgcolor={"black"} height={height}>
+    <Box
+      bgcolor={"black"}
+      style={{ aspectRatio: ASPECT_RATIO["3/2"].toString() }}
+      {...rest}
+    >
       <Fade in={true} appear={true} timeout={500}>
         <img
-          {...rest}
           width={"100%"}
-          height={height}
-          style={{ objectFit: "contain" }}
+          height={"100%"}
+          src={src}
+          style={{
+            objectFit: "contain",
+            aspectRatio: ASPECT_RATIO["3/2"].toString(),
+          }}
           loading={"lazy"}
         />
       </Fade>

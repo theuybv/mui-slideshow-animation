@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Box, Stack } from "@mui/material";
+import { Stack, StackProps } from "@mui/material";
 import { ImageDisplay } from "./ImageDisplay";
 import { ThumbsContainer } from "./ThumbsContainer";
 
@@ -10,36 +10,28 @@ export type CarouselImage = {
 };
 export type ImageCarouselProps = {
   images: CarouselImage[];
-  width: number;
-  height: number;
-};
+} & StackProps;
 
-export const ImageCarousel: FC<ImageCarouselProps> = ({
-  images,
-  width,
-  height,
-}) => {
+export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ...rest }) => {
   const [currentImage, setCurrentImage] = useState<CarouselImage | undefined>(
     images[0]
   );
 
   return (
-    <Box width={width} height={height}>
-      <Stack spacing={1.2}>
-        <ImageDisplay
-          key={currentImage?.imageSrc}
-          src={currentImage?.imageSrc}
-          height={height}
-        />
-        <ThumbsContainer
-          images={images}
-          onThumbClick={(event, clickedImageIndex) => {
-            setCurrentImage((prevState) => {
-              return images.find((item, index) => index === clickedImageIndex);
-            });
-          }}
-        />
-      </Stack>
-    </Box>
+    <Stack spacing={1.2} {...rest}>
+      <ImageDisplay key={currentImage?.imageSrc} src={currentImage?.imageSrc} />
+      <ThumbsContainer
+        options={{
+          thumbsGap: 1.2,
+          maxThumbsCount: 6,
+        }}
+        images={images}
+        onThumbClick={(event, clickedImageIndex) => {
+          setCurrentImage((prevState) => {
+            return images.find((item, index) => index === clickedImageIndex);
+          });
+        }}
+      />
+    </Stack>
   );
 };

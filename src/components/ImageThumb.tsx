@@ -1,29 +1,28 @@
-import { forwardRef, MouseEventHandler } from "react";
-import { Box } from "@mui/material";
-import { CarouselImage, ImageCarouselProps } from "./ImageCarousel";
-import { AspectRatio, getMaxDimensionFromAspectRatio } from "../utils";
+import { forwardRef } from "react";
+import { Box, BoxProps } from "@mui/material";
+import { ASPECT_RATIO } from "../utils";
 
 export type ImageThumbProps = {
-  images: ImageCarouselProps["images"];
-  imageIndex: number;
-  image: CarouselImage;
-  onThumbClick?: MouseEventHandler;
-  maxWidth: number;
-};
+  src: HTMLImageElement["src"];
+  width: HTMLImageElement["width"];
+} & Omit<BoxProps, "width">;
+
 export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
-  ({ image, images, onThumbClick, imageIndex, maxWidth = 100 }, ref) => {
-    const { width, height } = getMaxDimensionFromAspectRatio(
-      AspectRatio["4/3"],
-      maxWidth
-    );
+  ({ width, src, ...rest }, ref) => {
     return (
-      <Box ref={ref} onClick={onThumbClick}>
+      <Box
+        ref={ref}
+        style={{ aspectRatio: ASPECT_RATIO["4/3"].toString() }}
+        {...rest}
+      >
         <img
           width={width}
-          height={height}
-          src={image.thumbSrc}
-          alt={image.alt || ""}
-          style={{ objectFit: "cover" }}
+          height={"100%"}
+          src={src}
+          style={{
+            objectFit: "cover",
+            aspectRatio: ASPECT_RATIO["4/3"].toString(),
+          }}
           loading={"lazy"}
         />
       </Box>

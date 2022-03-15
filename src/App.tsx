@@ -23,12 +23,14 @@ function App() {
       setDimension(getDimension());
     }, 500);
 
+    setDimension(getDimension());
+
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="sm">
       <Box
         width={"100%"}
         ref={containerRef}

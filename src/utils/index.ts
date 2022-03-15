@@ -46,6 +46,12 @@ export const intersectRect = (aElement: HTMLElement, bElement: HTMLElement) => {
   );
 };
 
+export type ThumbElement = {
+  index: number;
+  element: HTMLElement;
+  isInView: boolean;
+};
+
 export const getThumbsIterator = (
   thumbRefs: RefObject<HTMLElement>[],
   thumbsContainerRef: RefObject<HTMLElement>
@@ -58,7 +64,7 @@ export const getThumbsIterator = (
         value.current as HTMLElement,
         thumbsContainerRef.current as HTMLElement
       ),
-    };
+    } as ThumbElement;
   });
 
   const thumbsInView = thumbElements.filter((value) => value.isInView);

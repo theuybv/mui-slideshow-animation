@@ -1,5 +1,5 @@
 import { ImageCarousel } from "./components/ImageCarousel";
-import { Box, Container, CssBaseline } from "@mui/material";
+import { Grid, Container, CssBaseline, Typography, Box } from "@mui/material";
 import {
   AspectRatio,
   getMaxDimensionFromAspectRatio,
@@ -30,19 +30,24 @@ function App() {
   }, []);
 
   return (
-    <Container maxWidth="xl">
-      <Box
-        width={"100%"}
-        ref={containerRef}
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        height={"100vh"}
-      >
-        <CssBaseline />
-        <ImageCarousel images={randomImages} width={width} height={height} />
-      </Box>
-    </Container>
+    <Box p={2}>
+      <CssBaseline />
+      <Grid container spacing={4}>
+        <Grid item xs={4}>
+          <Typography variant={"h3"}>My cool slideshow</Typography>
+          <Typography variant={"body1"}>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ad
+            adipisci aut beatae delectus doloribus eveniet, laudantium minus
+            nemo neque nobis odit officiis placeat quam repudiandae rerum unde
+            vel veritatis.
+          </Typography>
+        </Grid>
+
+        <Grid item xs={8}>
+          <ImageCarousel images={randomImages} width={width} height={height} />
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 

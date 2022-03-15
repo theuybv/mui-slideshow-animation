@@ -14,13 +14,14 @@ export const ImageDisplay: FC<ImageDisplayProps> = ({
   ...rest
 }) => {
   return (
-    <Box bgcolor={"black"}>
+    <Box bgcolor={"black"} height={height}>
       <Fade in={true} appear={true} timeout={500}>
         <img
           {...rest}
           width={"100%"}
           height={height}
           style={{ objectFit: "contain" }}
+          loading={"lazy"}
         />
       </Fade>
     </Box>

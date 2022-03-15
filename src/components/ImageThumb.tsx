@@ -24,6 +24,7 @@ export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
           src={image.thumbSrc}
           alt={image.alt || ""}
           style={{ objectFit: "cover" }}
+          loading={"lazy"}
         />
       </Box>
     );

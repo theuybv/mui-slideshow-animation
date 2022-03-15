@@ -7,7 +7,6 @@ export type CarouselImage = {
   imageSrc: string;
   alt?: string;
   thumbSrc: string;
-  id?: string;
 };
 export type ImageCarouselProps = {
   images: CarouselImage[];

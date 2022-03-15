@@ -1,6 +1,7 @@
 import { ImageCarouselProps } from "../components/ImageCarousel";
 import { faker } from "@faker-js/faker";
 import { RefObject } from "react";
+import { images } from "../data";
 
 export enum AspectRatio {
   "16/9" = 16 / 9,
@@ -17,25 +18,23 @@ export const getMaxDimensionFromAspectRatio = (
 ): { width: number; height: number } => {
   return {
     width: maxWidth,
-    height: Math.round(maxWidth / aspectRatio),
+    height: maxWidth / aspectRatio,
   };
 };
 
-export const randomImages: ImageCarouselProps["images"] = [...Array(10)].map(
-  (_value, index) => {
-    const { width, height } = getMaxDimensionFromAspectRatio(
-      AspectRatio["3/2"],
-      800
-    );
-    const imageURL = `https://via.placeholder.com/${width}x${height}?text=${index}`;
-    return {
-      imageSrc: imageURL,
-      thumbSrc: imageURL,
-      alt: faker.name.lastName(),
-      id: faker.random.alphaNumeric(),
-    };
-  }
-);
+export const randomImages: ImageCarouselProps["images"] = [
+  ...Array(images.length),
+].map((_value, index) => {
+  const { width, height } = getMaxDimensionFromAspectRatio(
+    AspectRatio["3/2"],
+    800
+  );
+  return {
+    imageSrc: images[index].image,
+    thumbSrc: images[index].thumbnail,
+    alt: faker.name.lastName(),
+  };
+});
 
 export const intersectRect = (aElement: HTMLElement, bElement: HTMLElement) => {
   const a = aElement.getBoundingClientRect();

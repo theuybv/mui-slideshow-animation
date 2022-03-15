@@ -8,12 +8,13 @@ export type ImageThumbProps = {
   imageIndex: number;
   image: CarouselImage;
   onThumbClick?: MouseEventHandler;
+  maxWidth: number;
 };
 export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
-  ({ image, images, onThumbClick, imageIndex }, ref) => {
+  ({ image, images, onThumbClick, imageIndex, maxWidth = 100 }, ref) => {
     const { width, height } = getMaxDimensionFromAspectRatio(
       AspectRatio["4/3"],
-      100
+      maxWidth
     );
     return (
       <Box ref={ref} onClick={onThumbClick}>

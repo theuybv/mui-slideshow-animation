@@ -6,7 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Box, IconButton, Stack } from "@mui/material";
+import { Box, IconButton, Stack, useTheme } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { CarouselImage } from "./ImageCarousel";
 import { ImageThumb } from "./ImageThumb";
@@ -17,6 +17,10 @@ export type ThumbsContainerProps = {
   onThumbClick: (event: ReactMouseEvent<Element>, imageIndex: number) => void;
 };
 
+const CAROUSEL_OPTIONS = {
+  MAX_THUMBS: 6,
+};
+
 export const ThumbsContainer: FC<ThumbsContainerProps> = ({
   images,
   onThumbClick,
@@ -24,7 +28,9 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
   const thumbsContainerRef = createRef<HTMLElement>();
   const [thumbRefs, setThumbRefs] = useState<RefObject<HTMLElement>[]>([]);
 
-  const [containerHeight, setContainerHeight] = useState<number>(0);
+  const [thumbContainerHeight, setThumbContainerHeight] = useState<number>(0);
+  const [thumbContainerWidth, setThumbContainerWidth] = useState<number>(0);
+
   const [showNav, setShowNav] = useState<{
     prev: boolean;
     next: boolean;
@@ -43,9 +49,19 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
 
   useEffect(() => {
     if (thumbsContainerRef && thumbsContainerRef.current) {
-      setContainerHeight(thumbsContainerRef.current.offsetHeight);
+      setThumbContainerHeight(thumbsContainerRef.current.offsetHeight);
+      setThumbContainerWidth(thumbsContainerRef.current.offsetWidth);
     }
   }, [thumbsContainerRef]);
+
+  const theme = useTheme();
+
+  const calculateMaxThumbWidth = (
+    maxThumbs: number = CAROUSEL_OPTIONS.MAX_THUMBS
+  ) => {
+    const singleGapPX = Number(theme.spacing(1).replace("px", ""));
+    return Math.round(thumbContainerWidth / maxThumbs - singleGapPX);
+  };
 
   const scrollIntoViewAndUpdate = (
     event: ReactMouseEvent<HTMLElement, MouseEvent>,
@@ -73,7 +89,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
           <Box
             position={"absolute"}
             left={0}
-            top={containerHeight / 2 - 24}
+            top={thumbContainerHeight / 2 - 24}
             height={"100%"}
             hidden={!showNav.prev}
           >
@@ -98,7 +114,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
           <Box
             position={"absolute"}
             right={0}
-            top={containerHeight / 2 - 24}
+            top={thumbContainerHeight / 2 - 24}
             height={"100%"}
             hidden={!showNav.next}
           >
@@ -131,6 +147,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
         {images.map((item, index) => {
           return (
             <ImageThumb
+              maxWidth={calculateMaxThumbWidth()}
               key={index}
               ref={thumbRefs[index]}
               imageIndex={index}

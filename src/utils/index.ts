@@ -3,13 +3,13 @@ import { faker } from '@faker-js/faker'
 import { RefObject } from 'react'
 import { images } from '../data'
 
-export enum ASPECT_RATIO {
-  "16/9" = 16 / 9,
-  "9/16" = 9 / 16,
-  "3/2" = 3 / 2,
-  "3/4" = 3 / 4,
-  "4/3" = 4 / 3,
-  "1/1" = 1,
+export enum ASPECT_RATIOS {
+  '16/9' = 16 / 9,
+  '9/16' = 9 / 16,
+  '3/2' = 3 / 2,
+  '3/4' = 3 / 4,
+  '4/3' = 4 / 3,
+  '1/1' = 1,
 }
 
 export const fakeImages: ImageCarouselProps['images'] = [...Array(images.length)].map(

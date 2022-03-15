@@ -30,6 +30,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
 
   const [thumbContainerHeight, setThumbContainerHeight] = useState<number>(0);
   const [thumbContainerWidth, setThumbContainerWidth] = useState<number>(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const [showNav, setShowNav] = useState<{
     prev: boolean;
@@ -104,7 +105,6 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
 
                 if (prevThumb) {
                   scrollIntoViewAndUpdate(event, prevThumb);
-                  onThumbClick && onThumbClick(event, prevThumb.index);
                 }
               }}
             >
@@ -128,7 +128,6 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
                 );
                 if (nextThumb) {
                   scrollIntoViewAndUpdate(event, nextThumb);
-                  onThumbClick && onThumbClick(event, nextThumb.index);
                 }
               }}
             >

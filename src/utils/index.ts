@@ -22,15 +22,15 @@ export const getMaxDimensionFromAspectRatio = (
 };
 
 export const randomImages: ImageCarouselProps["images"] = [...Array(10)].map(
-  () => {
+  (_value, index) => {
     const { width, height } = getMaxDimensionFromAspectRatio(
       AspectRatio["3/2"],
       800
     );
-    const image = faker.image.image(width, height, true);
+    const imageURL = `https://via.placeholder.com/${width}x${height}?text=${index}`;
     return {
-      imageSrc: image,
-      thumbSrc: image,
+      imageSrc: imageURL,
+      thumbSrc: imageURL,
       alt: faker.name.lastName(),
       id: faker.random.alphaNumeric(),
     };

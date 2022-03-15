@@ -4,12 +4,14 @@ import { RefObject } from "react";
 
 export enum AspectRatio {
   "16/9" = 16 / 9,
+  "9/16" = 9 / 16,
   "3/2" = 3 / 2,
   "3/4" = 3 / 4,
+  "4/3" = 4 / 3,
   "1/1" = 1,
 }
 
-export const getDimensionFromAspectRatio = (
+export const getMaxDimensionFromAspectRatio = (
   aspectRatio: AspectRatio,
   maxWidth: number = 800
 ): { width: number; height: number } => {
@@ -19,9 +21,9 @@ export const getDimensionFromAspectRatio = (
   };
 };
 
-export const randomImages: ImageCarouselProps["images"] = [...Array(20)].map(
+export const randomImages: ImageCarouselProps["images"] = [...Array(10)].map(
   () => {
-    const { width, height } = getDimensionFromAspectRatio(
+    const { width, height } = getMaxDimensionFromAspectRatio(
       AspectRatio["3/2"],
       800
     );

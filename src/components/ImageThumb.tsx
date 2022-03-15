@@ -1,7 +1,7 @@
 import { forwardRef, MouseEventHandler } from "react";
 import { Box } from "@mui/material";
 import { CarouselImage, ImageCarouselProps } from "./ImageCarousel";
-import { AspectRatio, getDimensionFromAspectRatio } from "../utils";
+import { AspectRatio, getMaxDimensionFromAspectRatio } from "../utils";
 
 export type ImageThumbProps = {
   images: ImageCarouselProps["images"];
@@ -11,9 +11,9 @@ export type ImageThumbProps = {
 };
 export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
   ({ image, images, onThumbClick, imageIndex }, ref) => {
-    const { width, height } = getDimensionFromAspectRatio(
-      AspectRatio["1/1"],
-      80
+    const { width, height } = getMaxDimensionFromAspectRatio(
+      AspectRatio["4/3"],
+      100
     );
     return (
       <Box ref={ref} onClick={onThumbClick}>

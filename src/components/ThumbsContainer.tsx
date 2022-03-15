@@ -47,14 +47,13 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
     }
   }, [thumbsContainerRef]);
 
-  const scrollIntoViewAndUpdateIndex = (
+  const scrollIntoViewAndUpdate = (
     event: ReactMouseEvent<HTMLElement, MouseEvent>,
     nextOrPrevThumb: ThumbElement
   ) => {
     nextOrPrevThumb.element?.scrollIntoView({
       behavior: "smooth",
     });
-    onThumbClick && onThumbClick(event, nextOrPrevThumb.index);
 
     setShowNav({
       prev:
@@ -88,7 +87,8 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
                 );
 
                 if (prevThumb) {
-                  scrollIntoViewAndUpdateIndex(event, prevThumb);
+                  scrollIntoViewAndUpdate(event, prevThumb);
+                  onThumbClick && onThumbClick(event, prevThumb.index);
                 }
               }}
             >
@@ -111,7 +111,8 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
                   thumbsContainerRef
                 );
                 if (nextThumb) {
-                  scrollIntoViewAndUpdateIndex(event, nextThumb);
+                  scrollIntoViewAndUpdate(event, nextThumb);
+                  onThumbClick && onThumbClick(event, nextThumb.index);
                 }
               }}
             >
@@ -149,7 +150,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
                   lastThumbInView &&
                   event.currentTarget === lastThumbInView.element
                 ) {
-                  scrollIntoViewAndUpdateIndex(
+                  scrollIntoViewAndUpdate(
                     event as ReactMouseEvent<HTMLElement, MouseEvent>,
                     nextThumb
                   );
@@ -158,13 +159,12 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
                   firstThumbInView &&
                   event.currentTarget === firstThumbInView.element
                 ) {
-                  scrollIntoViewAndUpdateIndex(
+                  scrollIntoViewAndUpdate(
                     event as ReactMouseEvent<HTMLElement, MouseEvent>,
                     prevThumb
                   );
-                } else {
-                  onThumbClick && onThumbClick(event, index);
                 }
+                onThumbClick && onThumbClick(event, index);
               }}
             />
           );

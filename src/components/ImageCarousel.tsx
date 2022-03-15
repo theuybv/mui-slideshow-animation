@@ -13,29 +13,31 @@ export type ImageCarouselProps = {
   images: CarouselImage[]
   ratio: number
   maxImageHeight: number
-}
+} & StackProps;
 
 export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ratio, maxImageHeight }) => {
   const [currentImage, setCurrentImage] = useState<CarouselImage | undefined>(images[0])
   console.log(ratio, maxImageHeight)
 
   return (
-    <Box maxHeight={maxImageHeight}>
-      <Stack spacing={1.2}>
+    <Stack spacing={1.2} {...rest}>
         <Box position={'relative'} height={0} paddingBottom={`${100 / ratio}%`}>
           <Box position={'absolute'} top={0} right={0} bottom={0} left={0} bgcolor={'black'}>
             <ImageFrame key={currentImage?.imageSrc} src={currentImage?.imageSrc} />
           </Box>
         </Box>
-        <ThumbsContainer
-          images={images}
-          onThumbClick={(event, clickedImageIndex) => {
-            setCurrentImage(prevState => {
-              return images.find((item, index) => index === clickedImageIndex)
-            })
-          }}
-        />
-      </Stack>
-    </Box>
-  )
-}
+      <ThumbsContainer
+        options={{
+          thumbsGap: 1.2,
+          maxThumbsCount: 6,
+        }}
+        images={images}
+        onThumbClick={(event, clickedImageIndex) => {
+          setCurrentImage((prevState) => {
+            return images.find((item, index) => index === clickedImageIndex);
+          });
+        }}
+      />
+    </Stack>
+  );
+};

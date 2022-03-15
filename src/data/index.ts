@@ -2,6 +2,7 @@ export const images = [
   {
     image: "https://picsum.photos/id/103/760/760",
     thumbnail: "https://picsum.photos/id/103/760/760",
+    test: "",
   },
   {
     image: "https://picsum.photos/id/106/760/760",

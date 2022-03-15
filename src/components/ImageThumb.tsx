@@ -17,9 +17,9 @@ export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
       >
         <img
           width={width}
-          height={"100%"}
           src={src}
           style={{
+            maxHeight: 80,
             objectFit: "cover",
             aspectRatio: ASPECT_RATIO["4/3"].toString(),
           }}

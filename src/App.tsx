@@ -1,54 +1,57 @@
-import { ImageCarousel } from "./components/ImageCarousel";
-import { Grid, Container, CssBaseline, Typography, Box } from "@mui/material";
-import {
-  AspectRatio,
-  getMaxDimensionFromAspectRatio,
-  randomImages,
-} from "./utils";
-import { useEffect, useRef, useState } from "react";
-import { throttle } from "lodash";
+import { ImageCarousel } from './components/ImageCarousel'
+import { Grid, CssBaseline, Typography, Box } from '@mui/material'
+import { AspectRatios, fakeImages } from './utils'
+import { FC, useEffect, useRef, useState } from 'react'
+import { throttle } from 'lodash'
 
-function App() {
-  const containerRef = useRef<HTMLElement>();
-  const getDimension = () =>
-    getMaxDimensionFromAspectRatio(
-      AspectRatio["3/2"],
-      containerRef.current?.getBoundingClientRect().width
-    );
+export const App: FC<{}> = () => {
+  const componentRef = useRef<HTMLElement>(null)
+  const getDimensions = (): { width: number | undefined; height: number | undefined } => {
+    const outsideHeight = componentRef.current?.clientHeight
+    const outsideWidth = outsideHeight && outsideHeight * AspectRatios['3/2']
 
-  const [{ width, height }, setDimension] = useState(getDimension());
+    return {
+      width: outsideWidth, // for backwards compatibility
+      height: outsideHeight,
+    }
+  }
+
+  const [{ width, height }, setDimensions] = useState(getDimensions())
 
   useEffect(() => {
     const onResize = throttle(() => {
-      setDimension(getDimension());
-    }, 500);
+      setDimensions(getDimensions())
+    }, 500)
+    setDimensions(getDimensions())
+    console.log(width, height)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
-    setDimension(getDimension());
-
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+  const maxImageHeight: number | string = 400 // or maybe '100%'
 
   return (
     <Box p={2}>
       <CssBaseline />
-      <Grid container spacing={4}>
+      <Grid container wrap={'nowrap'} spacing={4}>
         <Grid item xs={4}>
-          <Typography variant={"h3"}>My cool slideshow</Typography>
-          <Typography variant={"body1"}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ad
-            adipisci aut beatae delectus doloribus eveniet, laudantium minus
-            nemo neque nobis odit officiis placeat quam repudiandae rerum unde
-            vel veritatis.
+          <Typography variant={'h3'}>My cool slideshow</Typography>
+          <Typography variant={'body1'}>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ad adipisci aut beatae
+            delectus doloribus eveniet, laudantium minus nemo neque nobis odit officiis placeat quam
+            repudiandae rerum unde vel veritatis.
           </Typography>
         </Grid>
-
         <Grid item xs={8}>
-          <ImageCarousel images={randomImages} width={width} height={height} />
+          <ImageCarousel
+            images={fakeImages}
+            ratio={AspectRatios['3/2']}
+            maxImageHeight={maxImageHeight}
+          />
         </Grid>
       </Grid>
     </Box>
-  );
+  )
 }
 
-export default App;
+export default App

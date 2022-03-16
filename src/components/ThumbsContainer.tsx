@@ -41,7 +41,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
           <Box
             position={'absolute'}
             left={theme.spacing(options.thumbsGap)}
-            top={thumbContainerHeight / 2 - 18}
+            top={thumbContainerHeight / 2 - 12}
             height={"100%"}
             hidden={!showNav.prev}
           >
@@ -65,7 +65,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
           <Box
             position={'absolute'}
             right={theme.spacing(options.thumbsGap)}
-            top={thumbContainerHeight / 2 - 18}
+            top={thumbContainerHeight / 2 - 12}
             height={"100%"}
             hidden={!showNav.next}
           >

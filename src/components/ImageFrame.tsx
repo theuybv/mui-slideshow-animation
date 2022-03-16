@@ -11,19 +11,14 @@ export const ImageFrame: FC<ImageFrameProps> = ({ src, ratio, ...rest }) => {
   const maxWidth = maxHeight * ratio
 
   return (
-    <Box
-      bgcolor={'black'}
-      // maxWidth={maxWidth}
-      // maxHeight={maxHeight}
-      style={{ aspectRatio: ratio.toString() }}
-      {...rest}
-    >
+    <Box maxHeight={400} bgcolor={'black'} {...rest}>
       <Fade in appear timeout={500}>
         <img
           src={src}
           width={'100%'}
           height={'100%'}
           style={{
+            maxHeight: 400,
             objectFit: 'contain',
             aspectRatio: ratio.toString(),
           }}

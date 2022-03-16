@@ -18,7 +18,7 @@ export type ImageCarouselProps = {
 export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ratio, ...rest }) => {
   const [currentImage, setCurrentImage] = useState<CarouselImage | undefined>(images[0])
   const theme = useTheme()
-  const isXS = useMediaQuery(theme.breakpoints.down('sm'))
+  const isXS = useMediaQuery(theme.breakpoints.only('xs'))
 
   return (
     <Stack

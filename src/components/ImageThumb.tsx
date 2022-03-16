@@ -1,15 +1,16 @@
-import { forwardRef } from 'react'
-import { Box, BoxProps } from '@mui/material'
-import { ASPECT_RATIOS } from '../utils'
+import { forwardRef } from "react";
+import { Box, BoxProps, ButtonBase, ButtonBaseProps } from "@mui/material";
+import { ASPECT_RATIOS } from "../utils";
 
 export type ImageThumbProps = {
-  src: HTMLImageElement['src']
-  width: HTMLImageElement['width']
-} & Omit<BoxProps, 'width'>
+  src: HTMLImageElement["src"];
+  width: HTMLImageElement["width"];
+  onClick: ButtonBaseProps["onClick"];
+} & Omit<BoxProps, "width" | "onClick">;
 
 export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
-  ({ width, src, ...rest }, ref) => {
-    const aspectRatio = ASPECT_RATIOS['4/3']
+  ({ width, src, onClick, tabIndex, ...rest }, ref) => {
+    const aspectRatio = ASPECT_RATIOS["4/3"];
     return (
       <Box
         width={width}
@@ -20,17 +21,19 @@ export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
         }}
         {...rest}
       >
-        <img
-          width={'100%'}
-          height={'100%'}
-          src={src}
-          style={{
-            objectFit: 'cover',
-            aspectRatio: aspectRatio.toString(),
-          }}
-          loading={'lazy'}
-        />
+        <ButtonBase onClick={onClick} focusRipple={true} tabIndex={tabIndex}>
+          <img
+            width={"100%"}
+            height={"100%"}
+            src={src}
+            style={{
+              objectFit: "cover",
+              aspectRatio: aspectRatio.toString(),
+            }}
+            loading={"lazy"}
+          />
+        </ButtonBase>
       </Box>
-    )
+    );
   }
-)
+);

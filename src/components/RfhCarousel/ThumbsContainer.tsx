@@ -1,7 +1,7 @@
 import { FC, MouseEvent as ReactMouseEvent } from 'react'
 import { Box, IconButton, Stack, useTheme } from '@mui/material'
 import { ChevronLeft, ChevronRight } from '@mui/icons-material'
-import { CarouselImage } from './RfhCarousel'
+import type { CarouselImage } from './config'
 import { ImageThumb } from './ImageThumb'
 import { getThumbsIterator } from './utils'
 import { useThumbsContainer } from './hooks/useThumbsContainer'

@@ -1,4 +1,4 @@
-import { CarouselImage } from '../RfhCarousel'
+import type { CarouselImage } from '../config'
 import {
   createRef,
   MouseEvent as ReactMouseEvent,

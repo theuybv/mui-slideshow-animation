@@ -1,4 +1,4 @@
-import { RfhCarouselProps } from '../config'
+import type { RfhCarouselProps } from '../RfhCarousel'
 import { faker } from '@faker-js/faker'
 import { RefObject } from 'react'
 import { images } from '../data'

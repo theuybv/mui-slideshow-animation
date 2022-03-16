@@ -22,7 +22,7 @@ const RfhCarousel: FC<RfhCarouselProps> = ({ images, maxHeight, ratio, ...rest }
       <ImageContainer
         src={currentImage?.imageSrc}
         maxHeight={maxHeight || CarouselDefaults.maxHeight}
-        ratio={ratio || CarouselDefaults.ratio}
+        ratio={ratio || CarouselDefaults.mainImageRatio}
       />
       <ThumbsContainer
         images={images}
@@ -32,7 +32,7 @@ const RfhCarousel: FC<RfhCarouselProps> = ({ images, maxHeight, ratio, ...rest }
         }}
         onThumbClick={(event, clickedImageIndex) => {
           setCurrentImage(prevState => {
-            return images.find((item, index) => index === clickedImageIndex)
+            return images.find((_, index) => index === clickedImageIndex)
           })
         }}
       />

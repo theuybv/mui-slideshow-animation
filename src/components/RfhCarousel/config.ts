@@ -1,5 +1,3 @@
-import { StackProps } from '@mui/material/Stack'
-
 export enum ASPECT_RATIOS {
   '16/9' = 16 / 9,
   '9/16' = 9 / 16,
@@ -15,7 +13,7 @@ export type CarouselImage = {
   alt?: string
 }
 
-export type RfhCarouselProps = {
-  images: CarouselImage[]
-  ratio: number
-} & StackProps
+export const CarouselDefaults = {
+  ratio: ASPECT_RATIOS['4/3'],
+  maxHeight: 400,
+}

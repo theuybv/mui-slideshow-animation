@@ -45,12 +45,12 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
           <Box
             position={"absolute"}
             left={theme.spacing(options.thumbsGap)}
-            top={thumbContainerHeight / 2 - 24}
+            top={thumbContainerHeight / 2 - 18}
             height={"100%"}
             hidden={!showNav.prev}
           >
             <IconButton
-              style={{ background: "white" }}
+              style={{ background: "white", padding: 0 }}
               onClick={(event) => {
                 event.stopPropagation();
                 const { prevThumb } = getThumbsIterator(
@@ -69,12 +69,12 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
           <Box
             position={"absolute"}
             right={theme.spacing(options.thumbsGap)}
-            top={thumbContainerHeight / 2 - 24}
+            top={thumbContainerHeight / 2 - 18}
             height={"100%"}
             hidden={!showNav.next}
           >
             <IconButton
-              style={{ background: "white" }}
+              style={{ background: "white", padding: 0 }}
               onClick={(event) => {
                 event.stopPropagation();
                 const { nextThumb } = getThumbsIterator(

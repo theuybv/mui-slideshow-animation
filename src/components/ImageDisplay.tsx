@@ -7,12 +7,9 @@ export type ImageDisplayProps = {
 } & BoxProps;
 
 export const ImageDisplay: FC<ImageDisplayProps> = ({ src, ...rest }) => {
+  const aspectRatio = ASPECT_RATIO["3/2"].toString();
   return (
-    <Box
-      bgcolor={"black"}
-      style={{ aspectRatio: ASPECT_RATIO["3/2"].toString() }}
-      {...rest}
-    >
+    <Box bgcolor={"black"} {...rest}>
       <Fade in={true} appear={true} timeout={500}>
         <img
           width={"100%"}
@@ -20,7 +17,7 @@ export const ImageDisplay: FC<ImageDisplayProps> = ({ src, ...rest }) => {
           src={src}
           style={{
             objectFit: "contain",
-            aspectRatio: ASPECT_RATIO["3/2"].toString(),
+            aspectRatio,
           }}
           loading={"lazy"}
         />

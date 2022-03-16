@@ -37,15 +37,19 @@ export const useThumbsContainer = ({
   const [thumbContainerWidth, setThumbContainerWidth] = useState<number>(0);
 
   useEffect(() => {
-    setThumbContainerHeight(thumbsContainerRef.current.offsetHeight);
-    setThumbContainerWidth(thumbsContainerRef.current.offsetWidth);
+    const height = thumbsContainerRef.current.getBoundingClientRect().height;
+    const width = thumbsContainerRef.current.getBoundingClientRect().width;
+    setThumbContainerHeight(height);
+    setThumbContainerWidth(width);
   }, [thumbsContainerRef.current]);
 
   useEffect(() => {
     const onResize = throttle(() => {
-      setThumbContainerHeight(thumbsContainerRef.current.offsetHeight);
-      setThumbContainerWidth(thumbsContainerRef.current.offsetWidth);
-    }, 80);
+      const height = thumbsContainerRef.current.getBoundingClientRect().height;
+      const width = thumbsContainerRef.current.getBoundingClientRect().width;
+      setThumbContainerHeight(height);
+      setThumbContainerWidth(width);
+    }, 100);
 
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -55,7 +59,11 @@ export const useThumbsContainer = ({
     maxThumbs: number = thumbContainerPropsOptions.maxThumbsCount
   ) => {
     const singleGapPX = Number(theme.spacing(1).replace("px", ""));
-    return Math.round(thumbContainerWidth / maxThumbs - singleGapPX);
+    const maxThumbWidthToFillThumbContainer = Math.round(
+      thumbContainerWidth / maxThumbs - singleGapPX
+    );
+
+    return maxThumbWidthToFillThumbContainer;
   };
 
   const [showNav, setShowNav] = useState<{

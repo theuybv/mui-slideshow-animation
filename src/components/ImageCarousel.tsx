@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { Stack, StackProps } from "@mui/material";
 import { ImageDisplay } from "./ImageDisplay";
 import { ThumbsContainer } from "./ThumbsContainer";
+import { ASPECT_RATIO } from "../utils";
 
 export type CarouselImage = {
   imageSrc: string;
@@ -18,7 +19,11 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ...rest }) => {
   );
 
   return (
-    <Stack spacing={1.2} {...rest}>
+    <Stack
+      spacing={1.2}
+      {...rest}
+      style={{ aspectRatio: ASPECT_RATIO["3/2"].toString(), maxHeight: 400 }}
+    >
       <ImageDisplay key={currentImage?.imageSrc} src={currentImage?.imageSrc} />
       <ThumbsContainer
         options={{

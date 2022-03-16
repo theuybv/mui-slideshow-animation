@@ -23,7 +23,7 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ...rest }) => {
     <Stack
       spacing={1.2}
       {...rest}
-      style={{ aspectRatio: ASPECT_RATIO["3/2"].toString(), maxHeight: 400 }}
+      style={{ aspectRatio: ASPECT_RATIO["1/1"].toString(), maxHeight: 400 }}
     >
       <ImageDisplay key={currentImage?.imageSrc} src={currentImage?.imageSrc} />
       <ThumbsContainer

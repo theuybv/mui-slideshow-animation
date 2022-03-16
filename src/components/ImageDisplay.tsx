@@ -7,15 +7,16 @@ export type ImageDisplayProps = {
 } & BoxProps;
 
 export const ImageDisplay: FC<ImageDisplayProps> = ({ src, ...rest }) => {
-  const aspectRatio = ASPECT_RATIO["3/2"].toString();
+  const aspectRatio = ASPECT_RATIO["1/1"].toString();
   return (
-    <Box bgcolor={"black"} {...rest}>
+    <Box bgcolor={"black"} {...rest} maxHeight={400}>
       <Fade in={true} appear={true} timeout={500}>
         <img
           width={"100%"}
           height={"100%"}
           src={src}
           style={{
+            maxHeight: 400,
             objectFit: "contain",
             aspectRatio,
           }}

@@ -1,7 +1,6 @@
 import { ImageCarousel } from "./components/ImageCarousel";
 import { Box, CssBaseline, Grid, Typography } from "@mui/material";
 import { randomImages } from "./utils";
-import { useRef } from "react";
 
 function App() {
   return (

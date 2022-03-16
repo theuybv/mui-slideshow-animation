@@ -19,11 +19,7 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ratio, ...rest }
 
   return (
     <Stack spacing={1.2} {...rest}>
-      <Box position={'relative'} height={0} paddingBottom={`${100 / ratio}%`}>
-        <Box position={'absolute'} top={0} right={0} bottom={0} left={0} bgcolor={'black'}>
-          <ImageFrame key={currentImage?.imageSrc} src={currentImage?.imageSrc} ratio={ratio} />
-        </Box>
-      </Box>
+      <ImageFrame key={currentImage?.imageSrc} src={currentImage?.imageSrc} ratio={ratio} />
       <ThumbsContainer
         options={{
           thumbsGap: 1.2,

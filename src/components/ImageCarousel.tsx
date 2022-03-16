@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Stack, StackProps } from "@mui/material";
+import { Stack, StackProps, useMediaQuery, useTheme } from "@mui/material";
 import { ImageDisplay } from "./ImageDisplay";
 import { ThumbsContainer } from "./ThumbsContainer";
 import { ASPECT_RATIO } from "../utils";
@@ -17,7 +17,8 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ...rest }) => {
   const [currentImage, setCurrentImage] = useState<CarouselImage | undefined>(
     images[0]
   );
-
+  const theme = useTheme();
+  const isXS = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Stack
       spacing={1.2}
@@ -28,7 +29,7 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ...rest }) => {
       <ThumbsContainer
         options={{
           thumbsGap: 1.2,
-          maxThumbsCount: 6,
+          maxThumbsCount: isXS ? 5 : 6,
         }}
         images={images}
         onThumbClick={(event, clickedImageIndex) => {

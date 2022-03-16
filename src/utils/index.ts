@@ -67,5 +67,6 @@ export const getThumbsIterator = (
     firstThumbInView,
     nextThumb,
     prevThumb,
+    thumbsInView,
   };
 };

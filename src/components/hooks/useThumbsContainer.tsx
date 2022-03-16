@@ -10,7 +10,7 @@ import {
 import { throttle } from "lodash";
 import { ThumbsContainerProps } from "../ThumbsContainer";
 import { useTheme } from "@mui/material";
-import { ThumbElement } from "../../utils";
+import { getThumbsIterator, ThumbElement } from "../../utils";
 
 export type UseThumbsContainerProps = {
   images: CarouselImage[];
@@ -49,7 +49,7 @@ export const useThumbsContainer = ({
       const width = thumbsContainerRef.current.getBoundingClientRect().width;
       setThumbContainerHeight(height);
       setThumbContainerWidth(width);
-    }, 100);
+    }, 250);
 
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -87,6 +87,18 @@ export const useThumbsContainer = ({
       next: nextOrPrevThumb.index !== images.length - 1,
     });
   };
+
+  useEffect(() => {
+    const { thumbsInView, nextThumb, prevThumb } = getThumbsIterator(
+      thumbRefs,
+      thumbsContainerRef
+    );
+    const showNav = images.length > thumbsInView.length;
+    setShowNav({
+      prev: showNav && prevThumb !== undefined,
+      next: showNav && nextThumb !== undefined,
+    });
+  }, [images, thumbsContainerRef, thumbRefs]);
 
   return {
     thumbsContainerRef,

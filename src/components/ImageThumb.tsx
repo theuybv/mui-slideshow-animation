@@ -9,14 +9,14 @@ export type ImageThumbProps = {
 
 export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
   ({ width, src, ...rest }, ref) => {
-    const aspectRatio = ASPECT_RATIO["4/3"].toString();
+    const aspectRatio = ASPECT_RATIO["4/3"];
     return (
       <Box
         width={width}
-        height={width / ASPECT_RATIO["4/3"]}
+        height={width / aspectRatio}
         ref={ref}
         style={{
-          aspectRatio,
+          aspectRatio: aspectRatio.toString(),
         }}
         {...rest}
       >
@@ -26,7 +26,7 @@ export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
           src={src}
           style={{
             objectFit: "cover",
-            aspectRatio,
+            aspectRatio: aspectRatio.toString(),
           }}
           loading={"lazy"}
         />

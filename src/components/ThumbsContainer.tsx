@@ -41,15 +41,18 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
           <Box
             position={'absolute'}
             left={theme.spacing(options.thumbsGap)}
-            top={thumbContainerHeight / 2 - 24}
-            height={'100%'}
+            top={thumbContainerHeight / 2 - 18}
+            height={"100%"}
             hidden={!showNav.prev}
           >
             <IconButton
-              style={{ background: 'white' }}
-              onClick={event => {
-                event.stopPropagation()
-                const { prevThumb } = getThumbsIterator(thumbRefs, thumbsContainerRef)
+              style={{ background: "white", padding: 0 }}
+              onClick={(event) => {
+                event.stopPropagation();
+                const { prevThumb } = getThumbsIterator(
+                  thumbRefs,
+                  thumbsContainerRef
+                );
 
                 if (prevThumb) {
                   scrollIntoViewAndUpdate(event, prevThumb)
@@ -62,15 +65,18 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
           <Box
             position={'absolute'}
             right={theme.spacing(options.thumbsGap)}
-            top={thumbContainerHeight / 2 - 24}
-            height={'100%'}
+            top={thumbContainerHeight / 2 - 18}
+            height={"100%"}
             hidden={!showNav.next}
           >
             <IconButton
-              style={{ background: 'white' }}
-              onClick={event => {
-                event.stopPropagation()
-                const { nextThumb } = getThumbsIterator(thumbRefs, thumbsContainerRef)
+              style={{ background: "white", padding: 0 }}
+              onClick={(event) => {
+                event.stopPropagation();
+                const { nextThumb } = getThumbsIterator(
+                  thumbRefs,
+                  thumbsContainerRef
+                );
                 if (nextThumb) {
                   scrollIntoViewAndUpdate(event, nextThumb)
                 }

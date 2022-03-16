@@ -35,112 +35,106 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
   } = useThumbsContainer({ images, thumbContainerPropsOptions: options });
 
   return (
-    <Box display={"flex"} flexDirection={"column"}>
-      <Box position={"relative"} zIndex={1}>
+    <Box display={"flex"} flexDirection={"column"} px={options.thumbsGap}>
+      <Box position={"relative"}>
         <Box
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
+          position={"absolute"}
+          width={"100%"}
+          zIndex={1}
+          style={{ pointerEvents: "none" }}
         >
           <Box
-            position={"absolute"}
-            left={theme.spacing(options.thumbsGap)}
-            top={thumbContainerHeight / 2 - 18}
-            height={"100%"}
-            hidden={!showNav.prev}
+            display={"flex"}
+            justifyContent={!showNav.prev ? "end" : "space-between"}
+            alignItems={"center"}
+            height={thumbContainerHeight}
           >
-            <IconButton
-              style={{ background: "white", padding: 0 }}
-              onClick={(event) => {
-                event.stopPropagation();
-                const { prevThumb } = getThumbsIterator(
-                  thumbRefs,
-                  thumbsContainerRef
-                );
+            <Box hidden={!showNav.prev}>
+              <IconButton
+                style={{ background: "white", padding: 0 }}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  const { prevThumb } = getThumbsIterator(
+                    thumbRefs,
+                    thumbsContainerRef
+                  );
 
-                if (prevThumb) {
-                  scrollIntoViewAndUpdate(event, prevThumb);
-                }
-              }}
-            >
-              <ChevronLeft />
-            </IconButton>
-          </Box>
-          <Box
-            position={"absolute"}
-            right={theme.spacing(options.thumbsGap)}
-            top={thumbContainerHeight / 2 - 18}
-            height={"100%"}
-            hidden={!showNav.next}
-          >
-            <IconButton
-              style={{ background: "white", padding: 0 }}
-              onClick={(event) => {
-                event.stopPropagation();
-                const { nextThumb } = getThumbsIterator(
-                  thumbRefs,
-                  thumbsContainerRef
-                );
-                if (nextThumb) {
-                  scrollIntoViewAndUpdate(event, nextThumb);
-                }
-              }}
-            >
-              <ChevronRight />
-            </IconButton>
+                  if (prevThumb) {
+                    scrollIntoViewAndUpdate(event, prevThumb);
+                  }
+                }}
+              >
+                <ChevronLeft />
+              </IconButton>
+            </Box>
+            <Box hidden={!showNav.next}>
+              <IconButton
+                style={{ background: "white", padding: 0 }}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  const { nextThumb } = getThumbsIterator(
+                    thumbRefs,
+                    thumbsContainerRef
+                  );
+                  if (nextThumb) {
+                    scrollIntoViewAndUpdate(event, nextThumb);
+                  }
+                }}
+              >
+                <ChevronRight />
+              </IconButton>
+            </Box>
           </Box>
         </Box>
       </Box>
-      <Box px={options.thumbsGap}>
-        <Stack
-          position={"relative"}
-          direction="row"
-          gap={options.thumbsGap}
-          overflow={"hidden"}
-          ref={thumbsContainerRef}
-        >
-          {images.map((item, index) => {
-            return (
-              <ImageThumb
-                src={item.thumbSrc}
-                width={calculateMaxThumbWidth()}
-                key={index}
-                ref={thumbRefs[index]}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  const {
-                    firstThumbInView,
-                    lastThumbInView,
-                    nextThumb,
-                    prevThumb,
-                  } = getThumbsIterator(thumbRefs, thumbsContainerRef);
+      <Stack
+        position={"relative"}
+        direction="row"
+        gap={options.thumbsGap}
+        overflow={"hidden"}
+        ref={thumbsContainerRef}
+      >
+        {images.map((item, index) => {
+          return (
+            <ImageThumb
+              src={item.thumbSrc}
+              width={calculateMaxThumbWidth()}
+              key={index}
+              ref={thumbRefs[index]}
+              onClick={(event) => {
+                event.stopPropagation();
+                const {
+                  firstThumbInView,
+                  lastThumbInView,
+                  nextThumb,
+                  prevThumb,
+                } = getThumbsIterator(thumbRefs, thumbsContainerRef);
 
-                  if (
-                    nextThumb &&
-                    lastThumbInView &&
-                    event.currentTarget === lastThumbInView.element
-                  ) {
-                    scrollIntoViewAndUpdate(
-                      event as ReactMouseEvent<HTMLElement, MouseEvent>,
-                      nextThumb
-                    );
-                  } else if (
-                    prevThumb &&
-                    firstThumbInView &&
-                    event.currentTarget === firstThumbInView.element
-                  ) {
-                    scrollIntoViewAndUpdate(
-                      event as ReactMouseEvent<HTMLElement, MouseEvent>,
-                      prevThumb
-                    );
-                  }
-                  onThumbClick && onThumbClick(event, index);
-                }}
-              />
-            );
-          })}
-        </Stack>
-      </Box>
+                if (
+                  nextThumb &&
+                  lastThumbInView &&
+                  event.currentTarget === lastThumbInView.element
+                ) {
+                  scrollIntoViewAndUpdate(
+                    event as ReactMouseEvent<HTMLElement, MouseEvent>,
+                    nextThumb
+                  );
+                } else if (
+                  prevThumb &&
+                  firstThumbInView &&
+                  event.currentTarget === firstThumbInView.element
+                ) {
+                  scrollIntoViewAndUpdate(
+                    event as ReactMouseEvent<HTMLElement, MouseEvent>,
+                    prevThumb
+                  );
+                }
+                onThumbClick && onThumbClick(event, index);
+              }}
+            />
+          );
+        })}
+      </Stack>
     </Box>
   );
 };

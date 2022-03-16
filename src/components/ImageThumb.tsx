@@ -12,7 +12,9 @@ export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
     const aspectRatio = ASPECT_RATIO["4/3"].toString();
     return (
       <Box
+        bgcolor={"black"}
         width={width}
+        height={width / ASPECT_RATIO["4/3"]}
         ref={ref}
         style={{
           aspectRatio,
@@ -20,7 +22,7 @@ export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
         {...rest}
       >
         <img
-          width={width}
+          width={"100%"}
           height={"100%"}
           src={src}
           style={{

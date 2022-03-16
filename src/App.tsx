@@ -1,6 +1,7 @@
-import { ImageCarousel } from './components/ImageCarousel'
+import RfhCarousel from './components/RfhCarousel/RfhCarousel'
 import { Box, CssBaseline, Grid, Typography } from '@mui/material'
-import { ASPECT_RATIOS, fakeImages } from './utils'
+import { fakeImages } from './components/RfhCarousel/utils'
+import { ASPECT_RATIOS } from './components/RfhCarousel/config'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           </Typography>
         </Grid>
         <Grid item xs={12} md={8}>
-          <ImageCarousel images={fakeImages} ratio={ASPECT_RATIOS['3/2']} />
+          <RfhCarousel images={fakeImages} ratio={ASPECT_RATIOS['3/2']} />
         </Grid>
       </Grid>
     </Box>

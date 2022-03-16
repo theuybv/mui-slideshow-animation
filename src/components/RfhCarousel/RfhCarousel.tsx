@@ -1,21 +1,10 @@
 import { FC, useState } from 'react'
-import { Stack, StackProps, useMediaQuery, useTheme } from '@mui/material'
+import { Stack, useMediaQuery, useTheme } from '@mui/material'
 import { ImageFrame } from './ImageFrame'
 import { ThumbsContainer } from './ThumbsContainer'
-import { ASPECT_RATIOS } from '../utils'
+import { ASPECT_RATIOS, CarouselImage, RfhCarouselProps } from './config'
 
-export type CarouselImage = {
-  imageSrc: string
-  thumbSrc: string
-  alt?: string
-}
-
-export type ImageCarouselProps = {
-  images: CarouselImage[]
-  ratio: number
-} & StackProps
-
-export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ratio, ...rest }) => {
+const RfhCarousel: FC<RfhCarouselProps> = ({ images, ratio, ...rest }) => {
   const [currentImage, setCurrentImage] = useState<CarouselImage | undefined>(images[0])
   const theme = useTheme()
   const isXS = useMediaQuery(theme.breakpoints.only('xs'))
@@ -42,3 +31,5 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ratio, ...rest }
     </Stack>
   )
 }
+
+export default RfhCarousel

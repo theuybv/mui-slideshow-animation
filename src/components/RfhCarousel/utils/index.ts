@@ -1,18 +1,9 @@
-import { ImageCarouselProps } from '../components/ImageCarousel'
+import { RfhCarouselProps } from '../config'
 import { faker } from '@faker-js/faker'
 import { RefObject } from 'react'
 import { images } from '../data'
 
-export enum ASPECT_RATIOS {
-  '16/9' = 16 / 9,
-  '9/16' = 9 / 16,
-  '3/2' = 3 / 2,
-  '3/4' = 3 / 4,
-  '4/3' = 4 / 3,
-  '1/1' = 1,
-}
-
-export const fakeImages: ImageCarouselProps['images'] = [...Array(images.length)].map(
+export const fakeImages: RfhCarouselProps['images'] = [...Array(images.length)].map(
   (_value, index) => ({
     imageSrc: images[index].image,
     thumbSrc: images[index].thumbnail,
@@ -58,5 +49,5 @@ export const getThumbsIterator = (
     nextThumb,
     prevThumb,
     thumbsInView,
-  };
-};
+  }
+}

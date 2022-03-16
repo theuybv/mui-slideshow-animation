@@ -1,9 +1,9 @@
 import { FC, MouseEvent as ReactMouseEvent } from 'react'
 import { Box, IconButton, Stack, useTheme } from '@mui/material'
 import { ChevronLeft, ChevronRight } from '@mui/icons-material'
-import { CarouselImage } from './ImageCarousel'
+import { CarouselImage } from './RfhCarousel'
 import { ImageThumb } from './ImageThumb'
-import { getThumbsIterator } from '../utils'
+import { getThumbsIterator } from './utils'
 import { useThumbsContainer } from './hooks/useThumbsContainer'
 
 export type ThumbsContainerProps = {
@@ -42,17 +42,14 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
             position={'absolute'}
             left={theme.spacing(options.thumbsGap)}
             top={thumbContainerHeight / 2 - 12}
-            height={"100%"}
+            height={'100%'}
             hidden={!showNav.prev}
           >
             <IconButton
-              style={{ background: "white", padding: 0 }}
-              onClick={(event) => {
-                event.stopPropagation();
-                const { prevThumb } = getThumbsIterator(
-                  thumbRefs,
-                  thumbsContainerRef
-                );
+              style={{ background: 'white', padding: 0 }}
+              onClick={event => {
+                event.stopPropagation()
+                const { prevThumb } = getThumbsIterator(thumbRefs, thumbsContainerRef)
 
                 if (prevThumb) {
                   scrollIntoViewAndUpdate(event, prevThumb)
@@ -66,17 +63,14 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
             position={'absolute'}
             right={theme.spacing(options.thumbsGap)}
             top={thumbContainerHeight / 2 - 12}
-            height={"100%"}
+            height={'100%'}
             hidden={!showNav.next}
           >
             <IconButton
-              style={{ background: "white", padding: 0 }}
-              onClick={(event) => {
-                event.stopPropagation();
-                const { nextThumb } = getThumbsIterator(
-                  thumbRefs,
-                  thumbsContainerRef
-                );
+              style={{ background: 'white', padding: 0 }}
+              onClick={event => {
+                event.stopPropagation()
+                const { nextThumb } = getThumbsIterator(thumbRefs, thumbsContainerRef)
                 if (nextThumb) {
                   scrollIntoViewAndUpdate(event, nextThumb)
                 }

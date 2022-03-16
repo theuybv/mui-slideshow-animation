@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import { Box, BoxProps } from '@mui/material'
-import { ASPECT_RATIOS } from '../utils'
+import { ASPECT_RATIOS } from './config'
 
 export type ImageThumbProps = {
   src: HTMLImageElement['src']

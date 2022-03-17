@@ -12,8 +12,15 @@ export type RfhCarouselProps = {
   maxHeight?: number
 } & StackProps
 
-const RfhCarousel: FC<RfhCarouselProps> = ({ images, maxHeight, ratio, ...rest }) => {
-  const [currentImage, setCurrentImage] = useState<CarouselImage | undefined>(images[0])
+const RfhCarousel: FC<RfhCarouselProps> = ({
+  images,
+  maxHeight,
+  ratio,
+  ...rest
+}) => {
+  const [currentImage, setCurrentImage] = useState<CarouselImage | undefined>(
+    images[0]
+  )
   const theme = useTheme()
   const isXS = useMediaQuery(theme.breakpoints.only('xs'))
 

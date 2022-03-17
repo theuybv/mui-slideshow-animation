@@ -28,7 +28,7 @@ export const useThumbsContainer = ({
   useEffect(() => {
     setThumbsRefs(
       images.map((item, index) => {
-        return createRef<HTMLElement>()
+        return createRef()
       })
     )
   }, [images])
@@ -78,13 +78,17 @@ export const useThumbsContainer = ({
     })
 
     setShowNav({
-      prev: nextOrPrevThumb.index > 0 && nextOrPrevThumb.index <= images.length - 1,
+      prev:
+        nextOrPrevThumb.index > 0 && nextOrPrevThumb.index <= images.length - 1,
       next: nextOrPrevThumb.index !== images.length - 1,
     })
   }
 
   useEffect(() => {
-    const { thumbsInView, nextThumb, prevThumb } = getThumbsIterator(thumbsRefs, thumbsContainerRef)
+    const { thumbsInView, nextThumb, prevThumb } = getThumbsIterator(
+      thumbsRefs,
+      thumbsContainerRef
+    )
     const moreToShow = images.length > thumbsInView.length
     setShowNav({
       prev: moreToShow && prevThumb !== undefined,

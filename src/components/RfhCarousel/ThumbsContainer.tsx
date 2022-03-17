@@ -54,15 +54,27 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
 
   const handleClick = (event: ReactMouseEvent, index: number) => {
     event.stopPropagation()
-    const { firstThumbInView, lastThumbInView, nextThumb, prevThumb } = getThumbsIterator(
-      thumbsRefs,
-      thumbsContainerRef
-    )
+    const { firstThumbInView, lastThumbInView, nextThumb, prevThumb } =
+      getThumbsIterator(thumbsRefs, thumbsContainerRef)
 
-    if (nextThumb && lastThumbInView && event.currentTarget === lastThumbInView.element) {
-      scrollIntoViewAndUpdate(event as ReactMouseEvent<HTMLElement, MouseEvent>, nextThumb)
-    } else if (prevThumb && firstThumbInView && event.currentTarget === firstThumbInView.element) {
-      scrollIntoViewAndUpdate(event as ReactMouseEvent<HTMLElement, MouseEvent>, prevThumb)
+    if (
+      nextThumb &&
+      lastThumbInView &&
+      event.currentTarget === lastThumbInView.element
+    ) {
+      scrollIntoViewAndUpdate(
+        event as ReactMouseEvent<HTMLElement, MouseEvent>,
+        nextThumb
+      )
+    } else if (
+      prevThumb &&
+      firstThumbInView &&
+      event.currentTarget === firstThumbInView.element
+    ) {
+      scrollIntoViewAndUpdate(
+        event as ReactMouseEvent<HTMLElement, MouseEvent>,
+        prevThumb
+      )
     }
     onThumbClick && onThumbClick(event, index)
   }
@@ -78,7 +90,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
       <Box px={thumbsGap}>
         <Stack
           position={'relative'}
-          direction='row'
+          direction="row"
           gap={thumbsGap}
           overflow={'hidden'}
           ref={thumbsContainerRef}

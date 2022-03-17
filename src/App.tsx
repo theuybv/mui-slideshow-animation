@@ -11,13 +11,18 @@ function App() {
         <Grid item xs={12} md={4}>
           <Typography variant={'h3'}>My cool slideshow</Typography>
           <Typography variant={'body1'}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ad adipisci aut beatae
-            delectus doloribus eveniet, laudantium minus nemo neque nobis odit officiis placeat quam
-            repudiandae rerum unde vel veritatis.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ad
+            adipisci aut beatae delectus doloribus eveniet, laudantium minus
+            nemo neque nobis odit officiis placeat quam repudiandae rerum unde
+            vel veritatis.
           </Typography>
         </Grid>
         <Grid item xs={12} md={8}>
-          <RfhCarousel images={fakeImages} maxHeight={500} ratio={ASPECT_RATIOS['3/2']} />
+          <RfhCarousel
+            images={fakeImages}
+            maxHeight={500}
+            ratio={ASPECT_RATIOS['3/2']}
+          />
         </Grid>
       </Grid>
     </Box>

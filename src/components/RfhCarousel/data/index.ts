@@ -1,6 +1,5 @@
-import { ASPECT_RATIOS } from '../utils'
-import { CarouselImage } from '../components/ImageCarousel'
 import { faker } from '@faker-js/faker'
+import { ASPECT_RATIOS, CarouselImage } from '../config'
 
 export const getDemoImages = (
   numberOfImages: number,

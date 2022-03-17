@@ -1,6 +1,9 @@
 import { forwardRef } from 'react'
-import { Box, BoxProps, ButtonBase, ButtonBaseProps } from '@mui/material'
-import { ASPECT_RATIOS } from '../utils'
+import Box from '@mui/material/Box'
+import type { BoxProps } from '@mui/material/Box'
+import ButtonBase from '@mui/material/ButtonBase'
+import type { ButtonBaseProps } from '@mui/material/ButtonBase'
+import { CarouselDefaults } from './config'
 
 export type ImageThumbProps = {
   src: HTMLImageElement['src']
@@ -9,8 +12,9 @@ export type ImageThumbProps = {
 } & Omit<BoxProps, 'width' | 'onClick'>
 
 export const ImageThumb = forwardRef<HTMLButtonElement, ImageThumbProps>(
-  ({ width, src, onClick, tabIndex, ...rest }, ref) => {
-    const aspectRatio = ASPECT_RATIOS['4/3']
+  ({ src, tabIndex, width, onClick, ...rest }, ref) => {
+    const aspectRatio = CarouselDefaults.thumbImageRatio
+
     return (
       <Box
         width={width}

@@ -31,7 +31,6 @@ const NavigationArrows: FC<NavigationArrowsProps> = ({
     const positionX = prev
       ? { left: positionXSpacing }
       : { right: positionXSpacing }
-
     return (
       <Box
         position={'absolute'}

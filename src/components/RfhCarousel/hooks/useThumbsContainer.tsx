@@ -46,7 +46,7 @@ export const useThumbsContainer = ({
 
   useEffect(() => {
     setHeightWidth()
-  }, [thumbsContainerRef.current])
+  }, [thumbsContainerRef.current.offsetHeight])
 
   useEffect(() => {
     const onResize = throttle(() => {

@@ -36,6 +36,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
     thumbsContainerPropsOptions: options,
   })
 
+  console.log(thumbsContainerHeight)
   const handleNext = (event: ReactMouseEvent<HTMLElement, MouseEvent>) => {
     event.stopPropagation()
     const { nextThumb } = getThumbsIterator(thumbsRefs, thumbsContainerRef)

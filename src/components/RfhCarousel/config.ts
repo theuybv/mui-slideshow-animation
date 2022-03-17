@@ -17,5 +17,5 @@ export const CarouselDefaults = {
   mainImageRatio: ASPECT_RATIOS['4/3'],
   thumbImageRatio: ASPECT_RATIOS['4/3'],
   maxHeight: 400,
-  spacing: 1.2,
+  stackGap: 1.2,
 }

@@ -14,41 +14,41 @@ import { getThumbsIterator, ThumbElement } from '../utils'
 
 export type UseThumbsContainerProps = {
   images: CarouselImage[]
-  thumbContainerPropsOptions: ThumbsContainerProps['options']
+  thumbsContainerPropsOptions: ThumbsContainerProps['options']
 }
 
 export const useThumbsContainer = ({
   images,
-  thumbContainerPropsOptions,
+  thumbsContainerPropsOptions,
 }: UseThumbsContainerProps) => {
   const thumbsContainerRef = useRef<HTMLElement>(document.createElement('div'))
-  const [thumbRefs, setThumbRefs] = useState<RefObject<HTMLElement>[]>([])
+  const [thumbsRefs, setThumbsRefs] = useState<RefObject<HTMLElement>[]>([])
   const theme = useTheme()
 
   useEffect(() => {
-    setThumbRefs(
+    setThumbsRefs(
       images.map((item, index) => {
         return createRef<HTMLElement>()
       })
     )
   }, [images])
 
-  const [thumbContainerHeight, setThumbContainerHeight] = useState<number>(0)
-  const [thumbContainerWidth, setThumbContainerWidth] = useState<number>(0)
-
-  useEffect(() => {
+  const [thumbsContainerHeight, setThumbsContainerHeight] = useState<number>(0)
+  const [thumbsContainerWidth, setThumbsContainerWidth] = useState<number>(0)
+  const setHeightWidth = () => {
     const height = thumbsContainerRef.current.getBoundingClientRect().height
     const width = thumbsContainerRef.current.getBoundingClientRect().width
-    setThumbContainerHeight(height)
-    setThumbContainerWidth(width)
+    setThumbsContainerHeight(height)
+    setThumbsContainerWidth(width)
+  }
+
+  useEffect(() => {
+    setHeightWidth()
   }, [thumbsContainerRef.current])
 
   useEffect(() => {
     const onResize = throttle(() => {
-      const height = thumbsContainerRef.current.getBoundingClientRect().height
-      const width = thumbsContainerRef.current.getBoundingClientRect().width
-      setThumbContainerHeight(height)
-      setThumbContainerWidth(width)
+      setHeightWidth()
     }, 250)
 
     window.addEventListener('resize', onResize)
@@ -56,14 +56,10 @@ export const useThumbsContainer = ({
   }, [])
 
   const calculateMaxThumbWidth = (
-    maxThumbs: number = thumbContainerPropsOptions.maxThumbsCount
+    maxThumbs: number = thumbsContainerPropsOptions.maxThumbsCount
   ) => {
     const singleGapPX = Number(theme.spacing(1).replace('px', ''))
-    const maxThumbWidthToFillThumbContainer = Math.round(
-      thumbContainerWidth / maxThumbs - singleGapPX
-    )
-
-    return maxThumbWidthToFillThumbContainer
+    return Math.round(thumbsContainerWidth / maxThumbs - singleGapPX)
   }
 
   const [showNav, setShowNav] = useState<{
@@ -88,21 +84,21 @@ export const useThumbsContainer = ({
   }
 
   useEffect(() => {
-    const { thumbsInView, nextThumb, prevThumb } = getThumbsIterator(thumbRefs, thumbsContainerRef)
-    const showNav = images.length > thumbsInView.length
+    const { thumbsInView, nextThumb, prevThumb } = getThumbsIterator(thumbsRefs, thumbsContainerRef)
+    const moreToShow = images.length > thumbsInView.length
     setShowNav({
-      prev: showNav && prevThumb !== undefined,
-      next: showNav && nextThumb !== undefined,
+      prev: moreToShow && prevThumb !== undefined,
+      next: moreToShow && nextThumb !== undefined,
     })
-  }, [images, thumbsContainerRef, thumbRefs])
+  }, [images, thumbsContainerRef, thumbsRefs])
 
   return {
-    thumbsContainerRef,
-    thumbRefs,
-    thumbContainerHeight,
-    thumbContainerWidth,
     calculateMaxThumbWidth,
-    showNav,
     scrollIntoViewAndUpdate,
+    showNav,
+    thumbsContainerRef,
+    thumbsContainerHeight,
+    thumbsContainerWidth,
+    thumbsRefs,
   }
 }

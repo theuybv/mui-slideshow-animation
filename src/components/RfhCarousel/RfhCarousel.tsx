@@ -18,7 +18,7 @@ const RfhCarousel: FC<RfhCarouselProps> = ({ images, maxHeight, ratio, ...rest }
   const isXS = useMediaQuery(theme.breakpoints.only('xs'))
 
   return (
-    <Stack spacing={CarouselDefaults.spacing} {...rest}>
+    <Stack spacing={CarouselDefaults.stackGap} {...rest}>
       <ImageContainer
         src={currentImage?.imageSrc}
         maxHeight={maxHeight || CarouselDefaults.maxHeight}
@@ -27,7 +27,6 @@ const RfhCarousel: FC<RfhCarouselProps> = ({ images, maxHeight, ratio, ...rest }
       <ThumbsContainer
         images={images}
         options={{
-          thumbsGap: CarouselDefaults.spacing,
           maxThumbsCount: isXS ? 5 : 6,
         }}
         onThumbClick={(event, clickedImageIndex) => {

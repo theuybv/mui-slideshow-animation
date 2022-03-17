@@ -1,15 +1,15 @@
 import { FC, useState } from 'react'
 import Stack, { StackProps } from '@mui/material/Stack'
-import { useMediaQuery, useTheme } from '@mui/material'
+import { Box, useMediaQuery, useTheme } from '@mui/material'
 import { ImageContainer } from './ImageContainer'
 import { ThumbsContainer } from './ThumbsContainer'
 import type { CarouselImage } from './config'
-import { ASPECT_RATIOS, CarouselDefaults } from './config'
+import { AspectRatio, CarouselDefaults } from './config'
 import { useRfhCarousel } from './hooks/useRfhCarousel'
 
 export type RfhCarouselProps = {
   images: CarouselImage[]
-  ratio: ASPECT_RATIOS
+  ratio: AspectRatio
   maxHeight: number
 } & StackProps
 
@@ -28,26 +28,29 @@ const RfhCarousel: FC<RfhCarouselProps> = ({
   const { imageContainerRef, imageContainerWidth } = useRfhCarousel()
 
   return (
-    <Stack spacing={CarouselDefaults.stackGap} {...rest}>
+    <Box>
       <ImageContainer
+        key={currentImage?.imageSrc}
         ref={imageContainerRef}
         src={currentImage?.imageSrc}
         maxHeight={maxHeight}
         ratio={ratio}
       />
-      <ThumbsContainer
-        width={imageContainerWidth}
-        images={images}
-        options={{
-          maxThumbsCount: isXS ? 5 : 6,
-        }}
-        onThumbClick={(event, clickedImageIndex) => {
-          setCurrentImage(prevState => {
-            return images.find((_, index) => index === clickedImageIndex)
-          })
-        }}
-      />
-    </Stack>
+      <Box mt={CarouselDefaults.stackGap}>
+        <ThumbsContainer
+          width={imageContainerWidth}
+          images={images}
+          options={{
+            maxThumbsCount: isXS ? 5 : 6,
+          }}
+          onThumbClick={(event, clickedImageIndex) => {
+            setCurrentImage(prevState => {
+              return images.find((_, index) => index === clickedImageIndex)
+            })
+          }}
+        />
+      </Box>
+    </Box>
   )
 }
 

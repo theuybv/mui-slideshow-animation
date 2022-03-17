@@ -18,6 +18,7 @@ export const ImageContainer = forwardRef<HTMLElement, ImageContainerProps>(
         bgcolor={'black'}
         style={{
           aspectRatio: ratioAsString,
+          display: 'grid',
         }}
         {...rest}
       >

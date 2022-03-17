@@ -1,4 +1,4 @@
-import type { CarouselImage } from '../config'
+import { CarouselDefaults, CarouselImage } from '../config'
 import {
   createRef,
   MouseEvent as ReactMouseEvent,
@@ -51,7 +51,7 @@ export const useThumbsContainer = ({
   useEffect(() => {
     const onResize = throttle(() => {
       setHeightWidth()
-    }, 250)
+    }, CarouselDefaults.resizeThrottleWait)
 
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)

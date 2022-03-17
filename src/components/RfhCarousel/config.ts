@@ -1,4 +1,4 @@
-export enum ASPECT_RATIOS {
+export enum AspectRatio {
   '16/9' = 16 / 9,
   '9/16' = 9 / 16,
   '3/2' = 3 / 2,
@@ -14,8 +14,9 @@ export type CarouselImage = {
 }
 
 export const CarouselDefaults = {
-  mainImageRatio: ASPECT_RATIOS['4/3'],
-  thumbImageRatio: ASPECT_RATIOS['4/3'],
+  mainImageRatio: AspectRatio['4/3'],
+  thumbImageRatio: AspectRatio['4/3'],
   imageMaxHeight: 400,
   stackGap: 1.2,
+  resizeThrottleWait: 100,
 }

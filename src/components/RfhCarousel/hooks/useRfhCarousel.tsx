@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { throttle } from 'lodash'
+import { CarouselDefaults } from '../config'
 
 export const useRfhCarousel = () => {
   const [imageContainerWidth, setImageContainerWidth] = useState<
@@ -16,7 +17,7 @@ export const useRfhCarousel = () => {
     }
     const onResize = throttle(() => {
       updateWidth()
-    }, 100)
+    }, CarouselDefaults.resizeThrottleWait)
 
     updateWidth()
 

@@ -1,11 +1,8 @@
 import { Box, CssBaseline, Grid, Stack, Typography } from '@mui/material'
 import { getDemoImages } from './components/RfhCarousel/data'
-import {
-  ASPECT_RATIOS,
-  CarouselDefaults,
-} from './components/RfhCarousel/config'
 import { RfhCarousel } from './components/RfhCarousel'
 import { VFC } from 'react'
+import { AspectRatio, CarouselDefaults } from './components/RfhCarousel/config'
 
 const App: VFC = () => {
   return (
@@ -18,39 +15,46 @@ const App: VFC = () => {
         </Typography>
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
-            <Typography variant={'h6'}>20 images 1:1</Typography>
+            <Typography variant={'h6'}>
+              image maxHeight (default): {CarouselDefaults.imageMaxHeight}, 20
+              images, 1:1
+            </Typography>
           </Grid>
           <Grid item xs={12} md={8}>
             <RfhCarousel
               maxHeight={CarouselDefaults.imageMaxHeight}
-              images={getDemoImages(20, ASPECT_RATIOS['1/1'])}
-              ratio={ASPECT_RATIOS['3/2']}
+              images={getDemoImages(20, AspectRatio['1/1'])}
+              ratio={AspectRatio['3/2']}
             />
           </Grid>
         </Grid>
 
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
-            <Typography variant={'h6'}>4 images image 3:2</Typography>
+            <Typography variant={'h6'}>
+              image maxHeight 600, 4 images, 3:2
+            </Typography>
           </Grid>
           <Grid item xs={12} md={8}>
             <RfhCarousel
-              maxHeight={CarouselDefaults.imageMaxHeight}
-              images={getDemoImages(4, ASPECT_RATIOS['3/2'])}
-              ratio={ASPECT_RATIOS['3/2']}
+              maxHeight={600}
+              images={getDemoImages(4, AspectRatio['3/2'])}
+              ratio={AspectRatio['3/2']}
             />
           </Grid>
         </Grid>
 
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
-            <Typography variant={'h6'}>10 images image 4:3</Typography>
+            <Typography variant={'h6'}>
+              image maxHeight: 235, 10 images, 4:3
+            </Typography>
           </Grid>
           <Grid item xs={12} md={8}>
             <RfhCarousel
-              maxHeight={CarouselDefaults.imageMaxHeight}
-              images={getDemoImages(10, ASPECT_RATIOS['4/3'])}
-              ratio={ASPECT_RATIOS['3/2']}
+              maxHeight={235}
+              images={getDemoImages(10, AspectRatio['4/3'])}
+              ratio={AspectRatio['3/2']}
             />
           </Grid>
         </Grid>

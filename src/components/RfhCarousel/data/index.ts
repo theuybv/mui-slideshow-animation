@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker'
-import { ASPECT_RATIOS, CarouselImage } from '../config'
+import { AspectRatio, CarouselImage } from '../config'
 
 export const getDemoImages = (
   numberOfImages: number,
-  aspectRatio: ASPECT_RATIOS
+  aspectRatio: AspectRatio
 ): CarouselImage[] => {
   return [...Array(numberOfImages)].map((_value, index) => {
     const maxWidth = 1024

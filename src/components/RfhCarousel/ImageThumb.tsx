@@ -11,7 +11,7 @@ export type ImageThumbProps = {
   onClick: ButtonBaseProps['onClick']
 } & Omit<BoxProps, 'width' | 'onClick'>
 
-export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
+export const ImageThumb = forwardRef<HTMLButtonElement, ImageThumbProps>(
   ({ src, tabIndex, width, onClick, ...rest }, ref) => {
     const aspectRatio = CarouselDefaults.thumbImageRatio
 
@@ -19,19 +19,19 @@ export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
       <Box
         width={width}
         height={width / aspectRatio}
-        ref={ref}
         style={{
           aspectRatio: aspectRatio.toString(),
         }}
         {...rest}
       >
-        <ButtonBase onClick={onClick} focusRipple={true}>
+        <ButtonBase onClick={onClick} focusRipple={true} ref={ref}>
           <img
             width={'100%'}
             height={'100%'}
             src={src}
             style={{
               objectFit: 'cover',
+              aspectRatio: aspectRatio.toString(),
             }}
             loading={'lazy'}
           />

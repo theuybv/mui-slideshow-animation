@@ -1,15 +1,5 @@
-import type { RfhCarouselProps } from '../RfhCarousel'
-import { faker } from '@faker-js/faker'
 import { RefObject } from 'react'
-import { images } from '../data'
 
-export const fakeImages: RfhCarouselProps['images'] = [
-  ...Array(images.length),
-].map((_, index) => ({
-  imageSrc: images[index].image,
-  thumbSrc: images[index].thumbnail,
-  alt: faker.name.lastName(),
-}))
 export const intersectRect = (aElement: HTMLElement, bElement: HTMLElement) => {
   const a = aElement.getBoundingClientRect()
   const b = bElement.getBoundingClientRect()

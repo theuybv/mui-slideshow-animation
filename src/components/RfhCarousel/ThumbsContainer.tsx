@@ -1,5 +1,5 @@
 import { FC, MouseEvent as ReactMouseEvent } from 'react'
-import Box from '@mui/material/Box'
+import Box, { BoxProps } from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { CarouselDefaults, CarouselImage } from './config'
 import { ImageThumb } from './ImageThumb'
@@ -13,7 +13,7 @@ export type ThumbsContainerProps = {
     maxThumbsCount: number
   }
   onThumbClick: (event: ReactMouseEvent<Element>, imageIndex: number) => void
-}
+} & BoxProps
 
 export const ThumbsContainer: FC<ThumbsContainerProps> = ({
   images,
@@ -21,6 +21,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
     maxThumbsCount: 6,
   },
   onThumbClick,
+  ...rest
 }) => {
   const thumbsGap = CarouselDefaults.stackGap
   const {
@@ -80,7 +81,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
   }
 
   return (
-    <Box display={'flex'} flexDirection={'column'}>
+    <Box display={'flex'} flexDirection={'column'} {...rest}>
       <NavigationArrows
         showNav={showNav}
         thumbsContainerHeight={thumbsContainerHeight}

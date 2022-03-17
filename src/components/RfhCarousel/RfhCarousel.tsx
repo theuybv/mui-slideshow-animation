@@ -3,19 +3,20 @@ import Stack, { StackProps } from '@mui/material/Stack'
 import { useMediaQuery, useTheme } from '@mui/material'
 import { ImageContainer } from './ImageContainer'
 import { ThumbsContainer } from './ThumbsContainer'
-import { CarouselDefaults } from './config'
 import type { CarouselImage } from './config'
+import { ASPECT_RATIOS, CarouselDefaults } from './config'
+import { useRfhCarousel } from './hooks/useRfhCarousel'
 
 export type RfhCarouselProps = {
   images: CarouselImage[]
-  ratio?: number
-  maxHeight?: number
+  ratio: ASPECT_RATIOS
+  maxHeight: number
 } & StackProps
 
 const RfhCarousel: FC<RfhCarouselProps> = ({
   images,
-  maxHeight,
-  ratio,
+  maxHeight = CarouselDefaults.imageMaxHeight,
+  ratio = CarouselDefaults.mainImageRatio,
   ...rest
 }) => {
   const [currentImage, setCurrentImage] = useState<CarouselImage | undefined>(
@@ -24,14 +25,18 @@ const RfhCarousel: FC<RfhCarouselProps> = ({
   const theme = useTheme()
   const isXS = useMediaQuery(theme.breakpoints.only('xs'))
 
+  const { imageContainerRef, imageContainerWidth } = useRfhCarousel()
+
   return (
     <Stack spacing={CarouselDefaults.stackGap} {...rest}>
       <ImageContainer
+        ref={imageContainerRef}
         src={currentImage?.imageSrc}
-        maxHeight={maxHeight || CarouselDefaults.maxHeight}
-        ratio={ratio || CarouselDefaults.mainImageRatio}
+        maxHeight={maxHeight}
+        ratio={ratio}
       />
       <ThumbsContainer
+        width={imageContainerWidth}
         images={images}
         options={{
           maxThumbsCount: isXS ? 5 : 6,

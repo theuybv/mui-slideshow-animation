@@ -22,7 +22,9 @@ export const useThumbsContainer = ({
   thumbsContainerPropsOptions,
 }: UseThumbsContainerProps) => {
   const thumbsContainerRef = useRef<HTMLElement>(document.createElement('div'))
-  const [thumbsRefs, setThumbsRefs] = useState<RefObject<HTMLElement>[]>([])
+  const [thumbsRefs, setThumbsRefs] = useState<RefObject<HTMLButtonElement>[]>(
+    []
+  )
   const theme = useTheme()
 
   useEffect(() => {

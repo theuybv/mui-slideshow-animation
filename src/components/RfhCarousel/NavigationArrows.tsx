@@ -26,26 +26,48 @@ const NavigationArrows: FC<NavigationArrowsProps> = ({
   const theme = useTheme()
   const thumbsGap = CarouselDefaults.stackGap
 
-  const NavigationArrow: FC<NavigationArrowProps> = ({ prev }) => (
-    <Box
-      position={'absolute'}
-      left={theme.spacing(thumbsGap)}
-      top={thumbsContainerHeight / 2 - 12}
-      height={'100%'}
-      hidden={prev ? !showNav.prev : !showNav.next}
-    >
-      <IconButton
-        style={{ color: 'black', backgroundColor: 'white', padding: 0, opacity: 0.8 }}
-        onClick={prev ? handlePrev : handleNext}
+  const NavigationArrow: FC<NavigationArrowProps> = ({ prev }) => {
+    const positionXSpacing = theme.spacing(thumbsGap)
+    const positionX = prev
+      ? { left: positionXSpacing }
+      : { right: positionXSpacing }
+
+    return (
+      <Box
+        position={'absolute'}
+        {...positionX}
+        /**
+            the arrow button is 24x24 width
+            we divide it by 2 to get the top offset of (12px) but
+            we need extra offset of 2 pixels = 14px
+        */
+        top={thumbsContainerHeight / 2 - 14}
+        height={'100%'}
+        hidden={prev ? !showNav.prev : !showNav.next}
       >
-        {prev ? <ArrowLinkLeft /> : <ArrowLinkRight />}
-      </IconButton>
-    </Box>
-  )
+        <IconButton
+          style={{
+            color: 'black',
+            backgroundColor: 'white',
+            padding: 0,
+            opacity: 0.8,
+            borderRadius: 0,
+          }}
+          onClick={prev ? handlePrev : handleNext}
+        >
+          {prev ? <ArrowLinkLeft /> : <ArrowLinkRight />}
+        </IconButton>
+      </Box>
+    )
+  }
 
   return (
     <Box position={'relative'} zIndex={1}>
-      <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
+      <Box
+        display={'flex'}
+        alignItems={'center'}
+        justifyContent={'space-between'}
+      >
         <NavigationArrow prev />
         <NavigationArrow />
       </Box>

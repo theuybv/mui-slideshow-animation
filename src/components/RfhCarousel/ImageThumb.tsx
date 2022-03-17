@@ -1,14 +1,18 @@
 import { forwardRef } from 'react'
-import { Box, BoxProps } from '@mui/material'
+import Box from '@mui/material/Box'
+import type { BoxProps } from '@mui/material/Box'
+import ButtonBase from '@mui/material/ButtonBase'
+import type { ButtonBaseProps } from '@mui/material/ButtonBase'
 import { CarouselDefaults } from './config'
 
 export type ImageThumbProps = {
   src: HTMLImageElement['src']
   width: HTMLImageElement['width']
-} & Omit<BoxProps, 'width'>
+  onClick: ButtonBaseProps['onClick']
+} & Omit<BoxProps, 'width' | 'onClick'>
 
 export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
-  ({ src, width, ...rest }, ref) => {
+  ({ src, tabIndex, width, onClick, ...rest }, ref) => {
     const aspectRatio = CarouselDefaults.thumbImageRatio
 
     return (
@@ -21,15 +25,17 @@ export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
         }}
         {...rest}
       >
-        <img
-          width={'100%'}
-          height={'100%'}
-          src={src}
-          style={{
-            objectFit: 'cover',
-          }}
-          loading={'lazy'}
-        />
+        <ButtonBase onClick={onClick} focusRipple={true} tabIndex={tabIndex}>
+          <img
+            width={'100%'}
+            height={'100%'}
+            src={src}
+            style={{
+              objectFit: 'cover',
+            }}
+            loading={'lazy'}
+          />
+        </ButtonBase>
       </Box>
     )
   }

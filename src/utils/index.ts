@@ -12,17 +12,22 @@ export enum ASPECT_RATIOS {
   '1/1' = 1,
 }
 
-export const fakeImages: ImageCarouselProps['images'] = [...Array(images.length)].map(
-  (_value, index) => ({
-    imageSrc: images[index].image,
-    thumbSrc: images[index].thumbnail,
-    alt: faker.name.lastName(),
-  })
-)
+export const fakeImages: ImageCarouselProps['images'] = [
+  ...Array(images.length),
+].map((_value, index) => ({
+  imageSrc: images[index].image,
+  thumbSrc: images[index].thumbnail,
+  alt: faker.name.lastName(),
+}))
 export const intersectRect = (aElement: HTMLElement, bElement: HTMLElement) => {
   const a = aElement.getBoundingClientRect()
   const b = bElement.getBoundingClientRect()
-  return a.left <= b.right && b.left <= a.right && a.top <= b.bottom && b.top <= a.bottom
+  return (
+    a.left <= b.right &&
+    b.left <= a.right &&
+    a.top <= b.bottom &&
+    b.top <= a.bottom
+  )
 }
 
 export type ThumbElement = {
@@ -50,7 +55,8 @@ export const getThumbsIterator = (
   const lastThumbInView = thumbsInView[thumbsInView.length - 1]
   const firstThumbInView = thumbsInView[0]
   const nextThumb = lastThumbInView && thumbElements[lastThumbInView.index + 1]
-  const prevThumb = firstThumbInView && thumbElements[firstThumbInView.index - 1]
+  const prevThumb =
+    firstThumbInView && thumbElements[firstThumbInView.index - 1]
 
   return {
     lastThumbInView,
@@ -58,5 +64,5 @@ export const getThumbsIterator = (
     nextThumb,
     prevThumb,
     thumbsInView,
-  };
-};
+  }
+}

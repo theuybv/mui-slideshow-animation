@@ -15,8 +15,14 @@ export type ImageCarouselProps = {
   ratio: number
 } & StackProps
 
-export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ratio, ...rest }) => {
-  const [currentImage, setCurrentImage] = useState<CarouselImage | undefined>(images[0])
+export const ImageCarousel: FC<ImageCarouselProps> = ({
+  images,
+  ratio,
+  ...rest
+}) => {
+  const [currentImage, setCurrentImage] = useState<CarouselImage | undefined>(
+    images[0]
+  )
   const theme = useTheme()
   const isXS = useMediaQuery(theme.breakpoints.only('xs'))
 
@@ -24,9 +30,16 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ images, ratio, ...rest }
     <Stack
       spacing={1.2}
       {...rest}
-      style={{ aspectRatio: ASPECT_RATIOS['3/2'].toString(), maxHeight: 400 }}
+      style={{
+        aspectRatio: ASPECT_RATIOS['3/2'].toString(),
+        maxHeight: 400,
+      }}
     >
-      <ImageFrame key={currentImage?.imageSrc} src={currentImage?.imageSrc} ratio={ratio} />
+      <ImageFrame
+        key={currentImage?.imageSrc}
+        src={currentImage?.imageSrc}
+        ratio={ratio}
+      />
       <ThumbsContainer
         options={{
           thumbsGap: 1.2,

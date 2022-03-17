@@ -59,11 +59,7 @@ export const useThumbsContainer = ({
     maxThumbs: number = thumbContainerPropsOptions.maxThumbsCount
   ) => {
     const singleGapPX = Number(theme.spacing(1).replace('px', ''))
-    const maxThumbWidthToFillThumbContainer = Math.round(
-      thumbContainerWidth / maxThumbs - singleGapPX
-    )
-
-    return maxThumbWidthToFillThumbContainer
+    return Math.round(thumbContainerWidth / maxThumbs - singleGapPX)
   }
 
   const [showNav, setShowNav] = useState<{
@@ -79,6 +75,7 @@ export const useThumbsContainer = ({
   ) => {
     nextOrPrevThumb.element?.scrollIntoView({
       behavior: 'smooth',
+      block: 'nearest',
     })
 
     setShowNav({

@@ -1,42 +1,21 @@
-export const images = [
-  {
-    image: 'https://picsum.photos/id/103/760/760',
-    thumbnail: 'https://picsum.photos/id/103/760/760',
-  },
-  {
-    image: 'https://picsum.photos/id/106/760/760',
-    thumbnail: 'https://picsum.photos/id/106/760/760',
-  },
-  {
-    image: 'https://picsum.photos/id/107/760/760',
-    thumbnail: 'https://picsum.photos/id/107/760/760',
-  },
-  {
-    image: 'https://picsum.photos/id/152/760/760',
-    thumbnail: 'https://picsum.photos/id/152/760/760',
-  },
-  {
-    image: 'https://picsum.photos/id/153/760/760',
-    thumbnail: 'https://picsum.photos/id/153/760/760',
-  },
-  {
-    image: 'https://picsum.photos/id/154/760/760',
-    thumbnail: 'https://picsum.photos/id/154/760/760',
-  },
-  {
-    image: 'https://picsum.photos/id/203/760/760',
-    thumbnail: 'https://picsum.photos/id/203/760/760',
-  },
-  {
-    image: 'https://picsum.photos/id/204/760/760',
-    thumbnail: 'https://picsum.photos/id/204/760/760',
-  },
-  {
-    image: 'https://picsum.photos/id/206/760/760',
-    thumbnail: 'https://picsum.photos/id/206/760/760',
-  },
-  {
-    image: 'https://picsum.photos/id/208/760/760',
-    thumbnail: 'https://picsum.photos/id/208/760/760',
-  },
-]
+import { ASPECT_RATIOS } from '../utils'
+import { CarouselImage } from '../components/ImageCarousel'
+import { faker } from '@faker-js/faker'
+
+export const getDemoImages = (
+  numberOfImages: number,
+  aspectRatio: ASPECT_RATIOS
+): CarouselImage[] => {
+  return [...Array(numberOfImages)].map((_value, index) => {
+    const maxWidth = 1024
+    const height = Math.round(aspectRatio * maxWidth)
+    const width = Math.round(height * aspectRatio)
+
+    const image = `https://picsum.photos/${width}/${height}?random=${index}`
+    return {
+      thumbSrc: image,
+      imageSrc: image,
+      alt: faker.name.lastName(),
+    }
+  })
+}

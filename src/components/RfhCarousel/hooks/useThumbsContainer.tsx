@@ -61,7 +61,8 @@ export const useThumbsContainer = ({
     maxThumbs: number = thumbsContainerPropsOptions.maxThumbsCount
   ) => {
     const singleGapPX = Number(theme.spacing(1).replace('px', ''))
-    return Math.round(thumbsContainerWidth / maxThumbs - singleGapPX)
+    // return Math.round(thumbsContainerWidth / maxThumbs - singleGapPX)
+    return thumbsContainerWidth / maxThumbs - singleGapPX
   }
 
   const [showNav, setShowNav] = useState<{

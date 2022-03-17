@@ -9,6 +9,7 @@ import NavigationArrows from './NavigationArrows'
 
 export type ThumbsContainerProps = {
   images: CarouselImage[]
+  thumbsContainerSpacingX: number
   options: {
     maxThumbsCount: number
   }
@@ -17,6 +18,7 @@ export type ThumbsContainerProps = {
 
 export const ThumbsContainer: FC<ThumbsContainerProps> = ({
   images,
+  thumbsContainerSpacingX,
   options = {
     maxThumbsCount: 6,
   },
@@ -83,12 +85,13 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
   return (
     <Box display={'flex'} flexDirection={'column'} {...rest}>
       <NavigationArrows
+        positionXSpacing={thumbsContainerSpacingX * 8} // theme.spacing => px
         showNav={showNav}
         thumbsContainerHeight={thumbsContainerHeight}
         handleNext={handleNext}
         handlePrev={handlePrev}
       />
-      <Box px={thumbsGap}>
+      <Box px={thumbsContainerSpacingX}>
         <Stack
           position={'relative'}
           direction="row"

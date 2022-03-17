@@ -1,36 +1,32 @@
-import { FC, MouseEvent as ReactMouseEvent, MouseEventHandler } from 'react'
+import { FC, MouseEventHandler } from 'react'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
-import useTheme from '@mui/material/styles/useTheme'
 import ArrowLinkLeft from '../../shared/icons/ArrowLinkLeft'
 import ArrowLinkRight from '../../shared/icons/ArrowLinkRight'
-import { CarouselDefaults } from './config'
 
 export type NavigationArrowsProps = {
-  thumbsContainerHeight: number
+  positionXSpacing: number // px
   showNav: { prev: boolean; next: boolean }
+  thumbsContainerHeight: number
   handleNext: MouseEventHandler
   handlePrev: MouseEventHandler
 }
 
-type NavigationArrowProps = {
-  prev?: boolean
-}
-
 const NavigationArrows: FC<NavigationArrowsProps> = ({
-  thumbsContainerHeight,
+  positionXSpacing,
   showNav,
+  thumbsContainerHeight,
   handleNext,
   handlePrev,
 }) => {
-  const theme = useTheme()
-  const thumbsGap = CarouselDefaults.stackGap
+  type NavigationArrowProps = {
+    spacingX: number
+    prev?: boolean
+  }
 
-  const NavigationArrow: FC<NavigationArrowProps> = ({ prev }) => {
-    const positionXSpacing = theme.spacing(thumbsGap)
-    const positionX = prev
-      ? { left: positionXSpacing }
-      : { right: positionXSpacing }
+  const NavigationArrow: FC<NavigationArrowProps> = ({ spacingX, prev }) => {
+    const positionX = prev ? { left: spacingX } : { right: spacingX }
+
     return (
       <Box
         position={'absolute'}
@@ -67,8 +63,8 @@ const NavigationArrows: FC<NavigationArrowsProps> = ({
         alignItems={'center'}
         justifyContent={'space-between'}
       >
-        <NavigationArrow prev />
-        <NavigationArrow />
+        <NavigationArrow prev spacingX={positionXSpacing} />
+        <NavigationArrow spacingX={positionXSpacing} />
       </Box>
     </Box>
   )

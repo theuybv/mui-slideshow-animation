@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import Stack, { StackProps } from '@mui/material/Stack'
+import { StackProps } from '@mui/material/Stack'
 import { Box, useMediaQuery, useTheme } from '@mui/material'
 import { ImageContainer } from './ImageContainer'
 import { ThumbsContainer } from './ThumbsContainer'
@@ -11,12 +11,14 @@ export type RfhCarouselProps = {
   images: CarouselImage[]
   ratio: AspectRatio
   maxHeight: number
+  thumbsContainerSpacingX?: number
 } & StackProps
 
 const RfhCarousel: FC<RfhCarouselProps> = ({
   images,
   maxHeight = CarouselDefaults.imageMaxHeight,
   ratio = CarouselDefaults.mainImageRatio,
+  thumbsContainerSpacingX = CarouselDefaults.thumbsContainerSpacingX,
   ...rest
 }) => {
   const [currentImage, setCurrentImage] = useState<CarouselImage | undefined>(
@@ -39,6 +41,7 @@ const RfhCarousel: FC<RfhCarouselProps> = ({
       <Box mt={CarouselDefaults.stackGap}>
         <ThumbsContainer
           width={imageContainerWidth}
+          thumbsContainerSpacingX={thumbsContainerSpacingX}
           images={images}
           options={{
             maxThumbsCount: isXS ? 5 : 6,

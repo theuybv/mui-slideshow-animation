@@ -25,6 +25,7 @@ const App: VFC = () => {
               maxHeight={CarouselDefaults.imageMaxHeight}
               images={getDemoImages(20, AspectRatio['1/1'])}
               ratio={AspectRatio['3/2']}
+              thumbsContainerSpacingX={CarouselDefaults.stackGap}
             />
           </Grid>
         </Grid>

@@ -72,7 +72,7 @@ export const useThumbsContainer = ({
     next: true,
   })
   const scrollIntoViewAndUpdate = (
-    event: ReactMouseEvent<HTMLElement, MouseEvent>,
+    event: ReactMouseEvent<Element, MouseEvent>,
     nextOrPrevThumb: ThumbElement
   ) => {
     nextOrPrevThumb.element?.scrollIntoView({

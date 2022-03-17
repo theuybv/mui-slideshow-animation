@@ -1,4 +1,4 @@
-import { FC, MouseEvent as ReactMouseEvent } from 'react'
+import { FC, MouseEvent as ReactMouseEvent, MouseEventHandler } from 'react'
 import Box, { BoxProps } from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { CarouselDefaults, CarouselImage } from './config'
@@ -36,7 +36,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
     thumbsContainerPropsOptions: options,
   })
 
-  const handleNext = (event: ReactMouseEvent<HTMLElement, MouseEvent>) => {
+  const handleNext: MouseEventHandler = event => {
     event.stopPropagation()
     const { nextThumb } = getThumbsIterator(thumbsRefs, thumbsContainerRef)
     if (nextThumb) {
@@ -44,7 +44,7 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
     }
   }
 
-  const handlePrev = (event: ReactMouseEvent<HTMLElement, MouseEvent>) => {
+  const handlePrev: MouseEventHandler = event => {
     event.stopPropagation()
     const { prevThumb } = getThumbsIterator(thumbsRefs, thumbsContainerRef)
 

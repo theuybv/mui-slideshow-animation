@@ -75,6 +75,7 @@ export const useThumbsContainer = ({
   ) => {
     nextOrPrevThumb.element?.scrollIntoView({
       behavior: 'smooth',
+      block: 'nearest',
     })
 
     setShowNav({

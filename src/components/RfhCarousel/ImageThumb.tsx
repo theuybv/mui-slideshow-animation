@@ -25,7 +25,7 @@ export const ImageThumb = forwardRef<HTMLElement, ImageThumbProps>(
         }}
         {...rest}
       >
-        <ButtonBase onClick={onClick} focusRipple={true} tabIndex={tabIndex}>
+        <ButtonBase onClick={onClick} focusRipple={true}>
           <img
             width={'100%'}
             height={'100%'}

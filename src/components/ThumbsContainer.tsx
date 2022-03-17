@@ -102,7 +102,6 @@ export const ThumbsContainer: FC<ThumbsContainerProps> = ({
           {images.map((item, index) => {
             return (
               <ImageThumb
-                tabIndex={index}
                 src={item.thumbSrc}
                 width={calculateMaxThumbWidth()}
                 key={index}
